@@ -2,8 +2,6 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
-const projectRoot = new URL("../", import.meta.url);
-
 async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${path}`);
@@ -35,7 +33,27 @@ test("renders the finished portfolio homepage", async () => {
   assert.match(html, /BRAND STORYTELLER/);
   assert.match(html, /SELECTED/);
   assert.match(html, /MAKE MY TRIP/);
+  assert.ok(
+    html.indexOf('id="collaborations"') < html.indexOf('id="overview-title"'),
+    "Collaborations should appear before selected work",
+  );
+  assert.doesNotMatch(
+    html,
+    /Chidi|Creative portfolio presentation|PROFILE LINK TO BE ADDED|BRANDS THAT TRUSTED/i,
+  );
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
+});
+
+test("renders every case study route", async () => {
+  for (const slug of ["makemytrip", "spectra", "startup-india", "spec-ads"]) {
+    const response = await render(`/work/${slug}`);
+    assert.equal(response.status, 200, `${slug} should render`);
+    const html = await response.text();
+    assert.match(html, /THE BRIEF/);
+    assert.match(html, /SELECTED EXECUTIONS/);
+    assert.match(html, /RETURN TO SELECTED WORK/);
+    assert.doesNotMatch(html, /Chidi|PROFILE LINK TO BE ADDED/i);
+  }
 });
 
 test("keeps project content data-driven and starter-free", async () => {

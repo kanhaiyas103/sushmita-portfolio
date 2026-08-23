@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { BrandMarquee } from "@/components/BrandMarquee";
 import { CircularBadge } from "@/components/CircularBadge";
@@ -14,7 +13,7 @@ export default function Home() {
       <section className="hero" aria-labelledby="hero-title">
         <Reveal className="hero-kicker">
           <span>BRAND STORYTELLER</span>
-          <span className="edition">PORTFOLIO / 2026</span>
+          <span className="edition">PORTFOLIO / SELECTED WORK</span>
         </Reveal>
 
         <h1 id="hero-title">
@@ -29,7 +28,7 @@ export default function Home() {
           </p>
           <div className="hero-actions">
             <a className="primary-link" href="#work">
-              EXPLORE SELECTED WORK <span aria-hidden="true">↘</span>
+              EXPLORE SELECTED WORK <span aria-hidden="true">→</span>
             </a>
             <a className="text-link" href="#about">
               ABOUT THE STORYTELLER
@@ -52,14 +51,13 @@ export default function Home() {
           <Reveal>
             <h2 id="about-title">
               ABOUT
-              <span>THE STORYTELLER</span>
+              <span className="about-title__the">THE</span>
+              <span>STORYTELLER</span>
             </h2>
           </Reveal>
 
           <Reveal className="about-copy" delay={0.08}>
-            <p className="lead">
-              Communication begins with understanding people.
-            </p>
+            <p className="lead">Communication begins with understanding people.</p>
             <p>
               Sushmita Nanda is a storyteller focused on brands, audiences and
               the stories that connect them. She approaches every brief with
@@ -85,6 +83,34 @@ export default function Home() {
         </div>
       </section>
 
+      <section
+        className="brands section-shell"
+        id="collaborations"
+        aria-labelledby="brands-title"
+      >
+        <div className="section-line">
+          <span>02 / COLLABORATIONS</span>
+          <span>SELECTED COLLABORATIONS & PORTFOLIO WORK</span>
+        </div>
+
+        <div className="brands-heading">
+          <Reveal>
+            <h2 id="brands-title">COLLABORATIONS</h2>
+          </Reveal>
+          <div className="brands-heading__copy">
+            <p className="brands-heading__lead">
+              Brands, teams and stories I&apos;ve worked with.
+            </p>
+            <p>
+              A selection of organizations and brands represented across
+              Sushmita&apos;s supplied portfolio.
+            </p>
+          </div>
+        </div>
+
+        <BrandMarquee />
+      </section>
+
       <section className="works-transition" aria-labelledby="overview-title">
         <div className="transition-grid" aria-hidden="true" />
         <p>PORTFOLIO INTRODUCTION / SELECTED WORK</p>
@@ -99,13 +125,15 @@ export default function Home() {
           A range of formats and voices. One consistent intention: make the
           message clear, human and worth remembering.
         </p>
-        <span className="transition-mark" aria-hidden="true">✳</span>
+        <span className="transition-mark" aria-hidden="true">
+          ✳
+        </span>
       </section>
 
       <section className="work-section" id="work" aria-labelledby="work-title">
         <div className="section-shell work-intro">
           <div className="section-line">
-            <span>02 / SELECTED WORK</span>
+            <span>03 / SELECTED WORK</span>
             <span>DRAG TO EXPLORE</span>
           </div>
           <Reveal>
@@ -113,40 +141,10 @@ export default function Home() {
           </Reveal>
           <p>
             Campaign copy, digital storytelling and creative explorations—each
-            approached through the audience’s point of view.
+            approached through the audience&apos;s point of view.
           </p>
         </div>
         <ProjectRail />
-      </section>
-
-      <section className="brands section-shell" aria-labelledby="brands-title">
-        <div className="section-line">
-          <span>03 / COLLABORATIONS</span>
-          <span>SELECTED BRAND EXPERIENCE</span>
-        </div>
-        <div className="brands-heading">
-          <Reveal>
-            <h2 id="brands-title">
-              BRANDS THAT TRUSTED
-              <span>MY STORYTELLING</span>
-            </h2>
-          </Reveal>
-          <p>
-            Work represented in Sushmita’s supplied portfolio, across travel,
-            hospitality, technology, public initiatives and consumer brands.
-          </p>
-        </div>
-
-        <BrandMarquee />
-
-        <Reveal className="brand-board">
-          <Image
-            alt="A board of brand logos represented in Sushmita Nanda's portfolio"
-            fill
-            sizes="(max-width: 768px) 92vw, 84vw"
-            src="/images/portfolio/brands.jpeg"
-          />
-        </Reveal>
       </section>
 
       <section className="philosophy" id="philosophy" aria-labelledby="philosophy-title">
@@ -175,13 +173,17 @@ export default function Home() {
               <p>WHAT A BRAND</p>
               <strong>WANTS TO SAY</strong>
             </Reveal>
-            <span className="flow-arrow" aria-hidden="true">↓</span>
+            <span className="flow-arrow" aria-hidden="true">
+              ↓
+            </span>
             <Reveal className="flow-step flow-step--aqua">
               <span>02</span>
               <p>WHAT PEOPLE</p>
               <strong>NEED TO HEAR</strong>
             </Reveal>
-            <span className="flow-arrow" aria-hidden="true">↓</span>
+            <span className="flow-arrow" aria-hidden="true">
+              ↓
+            </span>
             <Reveal className="flow-step">
               <span>03</span>
               <p>WHAT THEY</p>
@@ -211,7 +213,8 @@ export default function Home() {
             <h2 id="contact-title">
               LET&apos;S MAKE
               <span>SOMETHING</span>
-              WORTH REMEMBERING.
+              <strong>WORTH</strong>
+              REMEMBERING.
             </h2>
           </Reveal>
 
@@ -221,6 +224,9 @@ export default function Home() {
               is another chance to tell a thoughtful, impactful story.
             </p>
             <address>
+              <a className="contact-hello" href="mailto:nandasushmita30@gmail.com">
+                SAY HELLO <span aria-hidden="true">↗</span>
+              </a>
               <a href="mailto:nandasushmita30@gmail.com">
                 <span>EMAIL</span>
                 nandasushmita30@gmail.com ↗
@@ -229,10 +235,6 @@ export default function Home() {
                 <span>PHONE</span>
                 +91 89201 53554
               </a>
-              <span className="contact-placeholder">
-                <b>LINKEDIN</b>
-                PROFILE LINK TO BE ADDED
-              </span>
             </address>
           </div>
         </div>
@@ -247,6 +249,7 @@ export default function Home() {
         <nav aria-label="Footer navigation">
           <a href="#work">WORK</a>
           <a href="#about">ABOUT</a>
+          <a href="#philosophy">PHILOSOPHY</a>
           <a href="#contact">CONTACT</a>
         </nav>
         <p>© 2026</p>

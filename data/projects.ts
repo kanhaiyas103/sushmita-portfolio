@@ -4,6 +4,7 @@ export type Project = {
   title: string;
   shortTitle: string;
   category: string;
+  year?: string;
   description: string;
   heroImage: string;
   gallery: string[];
@@ -22,16 +23,16 @@ export const projects: Project[] = [
     shortTitle: "MMT",
     category: "Consumer Copy & Campaign",
     description:
-      "Destination-led copy that turns browsing into a clear, inviting path through discovery.",
+      "Consumer-facing destination copy and guidance across MakeMyTrip’s digital travel experience.",
     heroImage: "/images/portfolio/makemytrip.jpeg",
     gallery: ["/images/portfolio/makemytrip.jpeg"],
     alt: "MakeMyTrip destination copy for Baku, Almaty and Hong Kong",
     brief:
-      "Translate destination discovery into concise, useful prompts for travellers across MakeMyTrip’s mobile and digital surfaces.",
+      "Create consumer-facing destination copy for MakeMyTrip’s mobile and digital travel experience.",
     approach:
-      "Organise each destination around a traveller’s immediate question: where to stay, what to explore, what feels familiar and what feels new.",
+      "The portfolio shows destination modules for Baku, Almaty and Hong Kong, using location guides, recommendations and clear next steps.",
     thinking:
-      "The copy balances utility with invitation—clear enough to guide a booking decision, warm enough to start a journey.",
+      "The writing works alongside the interface: concise, useful and focused on helping travellers understand their options.",
     theme: "aqua",
   },
   {
@@ -41,7 +42,7 @@ export const projects: Project[] = [
     shortTitle: "SPECTRA",
     category: "Digital / Editorial Storytelling",
     description:
-      "A connected body of social, editorial and contextual communication shaped around everyday work.",
+      "Social, contextual and digital communication shaped around recognizable workplace moments.",
     heroImage: "/images/portfolio/spectra-social.jpeg",
     gallery: [
       "/images/portfolio/spectra-editorial.jpeg",
@@ -49,11 +50,11 @@ export const projects: Project[] = [
     ],
     alt: "Spectra campaign work across editorial placements and social posts",
     brief:
-      "Build a recognisable editorial voice across digital placements, social posts and moments of internal culture.",
+      "Create copy across social posts, contextual executions and digital publication placements.",
     approach:
-      "Pair direct benefit-led language with familiar workplace observations, then adapt the tone to the context without losing the brand’s clarity.",
+      "The selected work uses direct, situational headlines across everyday work moments and people-led communication.",
     thinking:
-      "A consistent voice is not identical copy everywhere. It is a shared point of view that knows when to inform, when to smile and when to celebrate.",
+      "Across formats, the copy stays concise and grounded in the context in which it appears.",
     theme: "paper",
   },
   {
@@ -62,17 +63,18 @@ export const projects: Project[] = [
     title: "STARTUP INDIA",
     shortTitle: "STARTUP INDIA",
     category: "Content & Event Storytelling",
+    year: "2023",
     description:
-      "Structured storytelling for innovation-led content, summits and public-facing communication.",
+      "Video and innovation-summit communication represented in the Startup India portfolio work.",
     heroImage: "/images/portfolio/startup-india.jpeg",
     gallery: ["/images/portfolio/startup-india.jpeg"],
     alt: "Startup India video and innovation summit communication examples",
     brief:
-      "Bring clarity and narrative flow to innovation-led content and event communication for a broad audience.",
+      "Support Startup India communication across video-led pieces and innovation-summit content.",
     approach:
-      "Create a readable hierarchy first, then use concise language and a clear narrative order to make complex subject matter easier to enter.",
+      "The portfolio includes work for SuperStree and the Startup India Innovation Summit, presented as clear, focused visual stories.",
     thinking:
-      "When the subject is expansive, the writing has to become a guide: orient the audience, hold attention and move the story forward.",
+      "The selected examples use concise framing to introduce the subject and give each piece a clear entry point.",
     theme: "ink",
   },
   {
@@ -82,16 +84,16 @@ export const projects: Project[] = [
     shortTitle: "SPEC ADS",
     category: "Creative Exploration",
     description:
-      "Concepts, copy experiments and speculative briefs used to test ideas in unfamiliar territories.",
+      "Speculative briefs spanning travel, a voice-led dating concept and an extraterrestrial tourism prompt.",
     heroImage: "/images/portfolio/spec-ads.jpeg",
     gallery: ["/images/portfolio/spec-ads.jpeg"],
     alt: "Spec ad concepts for travel, Bumble and an alien tourism brief",
     brief:
-      "Explore unfamiliar briefs to sharpen concepting across short-form ads, long copy and playful brand scenarios.",
+      "Respond to three speculative briefs across short-form advertising, long copy and concept-led communication.",
     approach:
-      "Find one human tension in each prompt, choose a clear tonal direction and let the idea determine the length and form of the copy.",
+      "The selected work moves between an Indigo travel ad, a voice-first Bumble rebrand brief and an invitation for friendly aliens to visit Earth.",
     thinking:
-      "Creative experiments are useful because they remove the familiar answer. The work begins again with observation, language and a point of view.",
+      "Each execution follows the form of its brief, from a compact headline to longer narrative copy.",
     theme: "warm",
   },
 ];

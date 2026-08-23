@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CaseVisuals } from "@/components/CaseVisuals";
 import { Reveal } from "@/components/Reveal";
 import { SiteNav } from "@/components/SiteNav";
 import {
@@ -59,7 +60,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const neighbours = getProjectNeighbours(project.slug);
 
   return (
-    <main className={`case-study case-study--${project.theme}`}>
+    <main className={`case-study case-study--${project.theme} case-study--${project.slug}`}>
       <SiteNav />
 
       <article>
@@ -70,7 +71,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
 
           <div className="case-hero__title">
-            <p>{project.category}</p>
+            <p>
+              {project.category}
+              {project.year ? ` / ${project.year}` : ""}
+            </p>
             <h1>{project.title}</h1>
             <p>{project.description}</p>
           </div>
@@ -106,26 +110,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         <section className="case-work" aria-labelledby="selected-outputs-title">
           <div className="section-shell case-work__heading">
-            <span>SELECTED OUTPUTS</span>
+            <span>SELECTED EXECUTIONS</span>
             <h2 id="selected-outputs-title">THE WORK, IN CONTEXT.</h2>
           </div>
 
-          <div className="case-gallery section-shell">
-            {project.gallery.map((image, index) => (
-              <Reveal className="case-gallery__image" key={image}>
-                <div>
-                  <Image
-                    alt={`${project.alt} — selected output ${index + 1}`}
-                    fill
-                    sizes="(max-width: 768px) 92vw, 88vw"
-                    src={image}
-                  />
-                </div>
-                <p>
-                  {project.title} / OUTPUT {String(index + 1).padStart(2, "0")}
-                </p>
-              </Reveal>
-            ))}
+          <div className="section-shell">
+            <CaseVisuals project={project} />
+            <Link className="return-to-work" href="/#work">
+              RETURN TO SELECTED WORK <span aria-hidden="true">↗</span>
+            </Link>
           </div>
         </section>
 

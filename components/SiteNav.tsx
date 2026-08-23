@@ -19,6 +19,7 @@ export function SiteNav() {
   useEffect(() => {
     const sections = links
       .map((link) => document.getElementById(link.section))
+      .concat(document.getElementById("collaborations"))
       .filter(Boolean) as HTMLElement[];
     if (!sections.length) return;
 
@@ -27,7 +28,9 @@ export function SiteNav() {
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(visible.target.id);
+        if (visible) {
+          setActive(visible.target.id === "collaborations" ? "work" : visible.target.id);
+        }
       },
       { rootMargin: "-40% 0px -45% 0px", threshold: [0, 0.25, 0.6] },
     );
