@@ -11,14 +11,30 @@ type RevealProps = {
 
 export function Reveal({ children, className, delay = 0 }: RevealProps) {
   const reduceMotion = useReducedMotion();
+  const isHeadline = className?.split(" ").includes("headline-reveal") ?? false;
 
   return (
     <motion.div
       className={className}
-      initial={reduceMotion ? false : { opacity: 0, y: 34 }}
-      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.72, delay, ease: [0.2, 0.7, 0.2, 1] }}
+      initial={
+        reduceMotion
+          ? false
+          : {
+              opacity: isHeadline ? 0.58 : 0.35,
+              y: isHeadline ? 12 : 18,
+            }
+      }
+      whileInView={
+        reduceMotion
+          ? undefined
+          : { opacity: 1, y: 0 }
+      }
+      viewport={{ once: true, amount: 0.08 }}
+      transition={{
+        duration: isHeadline ? 0.68 : 0.56,
+        delay,
+        ease: [0.2, 0.7, 0.2, 1],
+      }}
     >
       {children}
     </motion.div>

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CaseVideos } from "@/components/CaseVideos";
 import { CaseVisuals } from "@/components/CaseVisuals";
+import { CaseStory } from "@/components/CaseStory";
+import { ProjectMark } from "@/components/ProjectMark";
 import { Reveal } from "@/components/Reveal";
 import { SiteNav } from "@/components/SiteNav";
 import {
@@ -67,52 +69,31 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <header className="case-hero section-shell">
           <div className="case-hero__crumb">
             <Link href="/#work">← ALL WORK</Link>
-            <span>PROJECT {project.number} / 04</span>
+            <span>THE PROJECT / {project.number} OF 04</span>
           </div>
 
-          <div className="case-hero__title">
-            <p>
-              {project.category}
-              {project.year ? ` / ${project.year}` : ""}
-            </p>
+          <Reveal className="case-hero__title headline-reveal">
+            <div className="case-hero__context">
+              <p>
+                {project.category}
+                {project.year ? ` / ${project.year}` : ""}
+              </p>
+              <ProjectMark slug={project.slug} />
+            </div>
             <h1>{project.title}</h1>
             <p>{project.description}</p>
-          </div>
-
-          <Reveal className="case-hero__image">
-            <Image
-              alt={project.alt}
-              fill
-              priority
-              sizes="(max-width: 768px) 92vw, 92vw"
-              src={project.heroImage}
-            />
           </Reveal>
+
+          <CaseVideos project={project} />
         </header>
 
-        <section className="case-narrative section-shell" aria-label="Project narrative">
-          <Reveal className="case-narrative__intro">
-            <span>THE BRIEF</span>
-            <p>{project.brief}</p>
-          </Reveal>
-
-          <div className="case-narrative__columns">
-            <Reveal>
-              <span>THE APPROACH</span>
-              <p>{project.approach}</p>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <span>THE THINKING</span>
-              <p>{project.thinking}</p>
-            </Reveal>
-          </div>
-        </section>
+        <CaseStory project={project} />
 
         <section className="case-work" aria-labelledby="selected-outputs-title">
-          <div className="section-shell case-work__heading">
-            <span>SELECTED EXECUTIONS</span>
+          <Reveal className="section-shell case-work__heading headline-reveal">
+            <span>EXECUTION / SELECTED OUTPUTS</span>
             <h2 id="selected-outputs-title">THE WORK, IN CONTEXT.</h2>
-          </div>
+          </Reveal>
 
           <div className="section-shell">
             <CaseVisuals project={project} />

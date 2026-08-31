@@ -1,6 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { BrandMarquee } from "@/components/BrandMarquee";
 import { CircularBadge } from "@/components/CircularBadge";
+import { EditorialAnnotations } from "@/components/EditorialAnnotations";
+import { HeroMotion } from "@/components/HeroMotion";
+import { PhilosophyFlow } from "@/components/PhilosophyFlow";
 import { ProjectRail } from "@/components/ProjectRail";
 import { Reveal } from "@/components/Reveal";
 import { SiteNav } from "@/components/SiteNav";
@@ -10,7 +14,8 @@ export default function Home() {
     <main>
       <SiteNav />
 
-      <section className="hero" aria-labelledby="hero-title">
+      <section className="hero" id="top" aria-labelledby="hero-title">
+        <HeroMotion />
         <Reveal className="hero-kicker">
           <span>BRAND STORYTELLER</span>
           <span className="edition">PORTFOLIO / SELECTED WORK</span>
@@ -22,10 +27,20 @@ export default function Home() {
         </h1>
 
         <Reveal className="hero-bottom" delay={0.14}>
-          <p>
-            Words, ideas and stories that make brands understood, remembered,
-            and felt.
-          </p>
+          <div className="hero-copy-stack">
+            <p className="hero-thought">
+              <span>Words,</span> <span>ideas</span> <span>and stories</span> that make
+              brands understood, remembered, and felt.
+            </p>
+            <EditorialAnnotations
+              ariaLabel="Storytelling annotations"
+              items={[
+                { word: "BRAND STORYTELLER", note: "CURIOSITY + INTENTION" },
+                { word: "WORDS", note: "THE PRECISION OF COPY" },
+                { word: "AUDIENCE", note: "UNDERSTANDING PEOPLE FIRST" },
+              ]}
+            />
+          </div>
           <div className="hero-actions">
             <a className="primary-link" href="#work">
               EXPLORE SELECTED WORK <span aria-hidden="true">→</span>
@@ -48,7 +63,7 @@ export default function Home() {
         </div>
 
         <div className="about-grid">
-          <Reveal>
+          <Reveal className="headline-reveal">
             <h2 id="about-title">
               ABOUT
               <span className="about-title__the">THE</span>
@@ -67,18 +82,52 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <Reveal className="about-note" delay={0.14}>
-            <span>HER PRACTICE CONNECTS</span>
-            <ul>
-              <li>BRAND VOICE</li>
-              <li>AUDIENCE UNDERSTANDING</li>
-              <li>CREATIVE COPY</li>
-              <li>EDITORIAL THINKING</li>
-            </ul>
-          </Reveal>
+          <div className="about-story">
+            <Reveal className="about-story__aside" delay={0.14}>
+              <div className="about-note">
+                <span>HER PRACTICE CONNECTS</span>
+                <p
+                  className="about-process"
+                  aria-label="Observe, understand, think, write"
+                >
+                  <span>OBSERVE</span>
+                  <b aria-hidden="true">→</b>
+                  <span>UNDERSTAND</span>
+                  <b aria-hidden="true">→</b>
+                  <span>THINK</span>
+                  <b aria-hidden="true">→</b>
+                  <span>WRITE</span>
+                </p>
+                <ul>
+                  <li>BRAND VOICE</li>
+                  <li>AUDIENCE UNDERSTANDING</li>
+                  <li>CREATIVE COPY</li>
+                  <li>EDITORIAL THINKING</li>
+                </ul>
+              </div>
 
-          <div className="about-badge">
-            <CircularBadge text="SIMPLE INTENTIONAL IMPACTFUL" tone="light" />
+              <div className="about-badge">
+                <CircularBadge text="SIMPLE INTENTIONAL IMPACTFUL" tone="light" />
+              </div>
+            </Reveal>
+
+            <Reveal className="about-portrait-frame" delay={0.18}>
+              <figure className="about-portrait">
+                <div className="about-portrait__media">
+                  <Image
+                    className="about-portrait__image"
+                    src="/images/portfolio/sushmita-portrait-cutout.png"
+                    alt="Portrait of Sushmita Nanda"
+                    fill
+                    sizes="(max-width: 700px) calc(100vw - 44px), (max-width: 980px) calc(100vw - 80px), (max-width: 1320px) 62vw, 780px"
+                  />
+                </div>
+                <figcaption className="about-portrait__caption">
+                  <span>PORTRAIT / SUSHMITA NANDA</span>
+                  <span>BRAND STORYTELLER</span>
+                </figcaption>
+              </figure>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -108,13 +157,18 @@ export default function Home() {
           </div>
         </div>
 
+        <p className="brands-archive-note">
+          <span>FROM THE ARCHIVE</span>
+          Each mark holds a different audience, voice and story.
+        </p>
+
         <BrandMarquee />
       </section>
 
       <section className="works-transition" aria-labelledby="overview-title">
         <div className="transition-grid" aria-hidden="true" />
         <p>PORTFOLIO INTRODUCTION / SELECTED WORK</p>
-        <Reveal>
+        <Reveal className="headline-reveal">
           <h2 id="overview-title">
             SELECTED
             <span>WORKS</span>
@@ -134,17 +188,33 @@ export default function Home() {
         <div className="section-shell work-intro">
           <div className="section-line">
             <span>03 / SELECTED WORK</span>
-            <span>DRAG TO EXPLORE</span>
+            <span>CASE STUDIES AT A GLANCE</span>
           </div>
-          <Reveal>
+          <Reveal className="headline-reveal">
             <h2 id="work-title">STORIES, SHAPED FOR THE MOMENT.</h2>
           </Reveal>
           <p>
             Campaign copy, digital storytelling and creative explorations—each
             approached through the audience&apos;s point of view.
           </p>
+          <EditorialAnnotations
+            ariaLabel="Selected work annotations"
+            items={[
+              { word: "VOICE", note: "THE NUANCE OF BRAND VOICE" },
+              { word: "AUDIENCE", note: "THROUGH THE AUDIENCE’S POINT OF VIEW" },
+              { word: "WORDS", note: "CLEAR, HUMAN, WORTH REMEMBERING" },
+            ]}
+          />
         </div>
         <ProjectRail />
+      </section>
+
+      <section className="editorial-pause" aria-label="Editorial pause">
+        <p>
+          THE WORK CHANGES.
+          <span>THE INTENTION STAYS.</span>
+        </p>
+        <small>CLARITY / VOICE / PURPOSE</small>
       </section>
 
       <section className="philosophy" id="philosophy" aria-labelledby="philosophy-title">
@@ -155,7 +225,7 @@ export default function Home() {
           </div>
 
           <div className="philosophy-intro">
-            <Reveal>
+            <Reveal className="headline-reveal">
               <h2 id="philosophy-title">
                 STORYTELLING
                 <span>PHILOSOPHY</span>
@@ -167,29 +237,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="philosophy-flow">
-            <Reveal className="flow-step">
-              <span>01</span>
-              <p>WHAT A BRAND</p>
-              <strong>WANTS TO SAY</strong>
-            </Reveal>
-            <span className="flow-arrow" aria-hidden="true">
-              ↓
-            </span>
-            <Reveal className="flow-step flow-step--aqua">
-              <span>02</span>
-              <p>WHAT PEOPLE</p>
-              <strong>NEED TO HEAR</strong>
-            </Reveal>
-            <span className="flow-arrow" aria-hidden="true">
-              ↓
-            </span>
-            <Reveal className="flow-step">
-              <span>03</span>
-              <p>WHAT THEY</p>
-              <strong>REMEMBER</strong>
-            </Reveal>
-          </div>
+          <PhilosophyFlow />
 
           <div className="philosophy-footer">
             <CircularBadge text="ORGANIZING CONTENT WITH CLARITY" tone="light" />
@@ -209,7 +257,11 @@ export default function Home() {
             <span>GURUGRAM, INDIA</span>
           </div>
 
-          <Reveal>
+          <p className="contact-final-line">
+            If the story is worth telling, let&apos;s find the words.
+          </p>
+
+          <Reveal className="headline-reveal">
             <h2 id="contact-title">
               LET&apos;S MAKE
               <span>SOMETHING</span>

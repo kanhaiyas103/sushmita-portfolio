@@ -1,4 +1,7 @@
+"use client";
+
 import type { CSSProperties } from "react";
+import { useState } from "react";
 
 type BrandCrop = {
   name: string;
@@ -27,7 +30,19 @@ const brandRows: BrandCrop[][] = [
 
 const scale = 0.44;
 
-function BrandUnit({ brand, duplicate = false }: { brand: BrandCrop; duplicate?: boolean }) {
+function BrandUnit({
+  activeName,
+  brand,
+  duplicate = false,
+  onActivate,
+  onDeactivate,
+}: {
+  activeName: string | null;
+  brand: BrandCrop;
+  duplicate?: boolean;
+  onActivate: (name: string) => void;
+  onDeactivate: () => void;
+}) {
   const [x, y, width, height] = brand.crop;
   const style = {
     width: `${width * scale}px`,
@@ -37,8 +52,8 @@ function BrandUnit({ brand, duplicate = false }: { brand: BrandCrop; duplicate?:
     backgroundPosition: `${-x * scale}px ${-y * scale}px`,
   } as CSSProperties;
 
-  return (
-    <article aria-hidden={duplicate || undefined} className="brand-unit">
+  const content = (
+    <>
       <div
         aria-label={duplicate ? undefined : `${brand.name} logo`}
         className="brand-unit__crop"
@@ -49,21 +64,59 @@ function BrandUnit({ brand, duplicate = false }: { brand: BrandCrop; duplicate?:
         {brand.name}
         <span>PORTFOLIO WORK</span>
       </p>
-    </article>
+    </>
+  );
+
+  if (duplicate) {
+    return (
+      <article
+        aria-hidden="true"
+        className={`brand-unit${activeName === brand.name ? " is-active" : ""}`}
+      >
+        {content}
+      </article>
+    );
+  }
+
+  return (
+    <button
+      aria-pressed={activeName === brand.name}
+      className={`brand-unit${activeName === brand.name ? " is-active" : ""}`}
+      onBlur={onDeactivate}
+      onClick={() => onActivate(brand.name)}
+      onFocus={() => onActivate(brand.name)}
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") onActivate(brand.name);
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType === "mouse") onDeactivate();
+      }}
+      type="button"
+    >
+      {content}
+    </button>
   );
 }
 
 export function BrandMarquee() {
+  const [activeName, setActiveName] = useState<string | null>(null);
+
   return (
-    <div className="brand-marquees" aria-label="Selected collaborations and portfolio work">
+    <div
+      className={`brand-marquees${activeName ? " has-active" : ""}`}
+      aria-label="Selected collaborations and portfolio work"
+    >
       {brandRows.map((brands, rowIndex) => (
         <div className={`marquee marquee--${rowIndex === 0 ? "left" : "right"}`} key={rowIndex}>
           <div className="marquee__track">
             {[...brands, ...brands].map((brand, index) => (
               <BrandUnit
+                activeName={activeName}
                 brand={brand}
                 duplicate={index >= brands.length}
                 key={`${brand.name}-${index}`}
+                onActivate={setActiveName}
+                onDeactivate={() => setActiveName(null)}
               />
             ))}
           </div>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const links = [
   { label: "WORK", href: "/#work", section: "work" },
@@ -15,24 +15,37 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
   const reduceMotion = useReducedMotion();
+  const menuRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const sections = links
-      .map((link) => document.getElementById(link.section))
-      .concat(document.getElementById("collaborations"))
+    const sectionIds = ["top", "about", "collaborations", "work", "philosophy", "contact"];
+    const sections = sectionIds
+      .map((sectionId) => document.getElementById(sectionId))
       .filter(Boolean) as HTMLElement[];
     if (!sections.length) return;
 
+    const visibility = new Map(sections.map((section) => [section.id, 0]));
+
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) {
-          setActive(visible.target.id === "collaborations" ? "work" : visible.target.id);
+        entries.forEach((entry) => {
+          visibility.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
+        });
+
+        const visibleId = [...visibility.entries()].sort((a, b) => b[1] - a[1])[0];
+        if (!visibleId || visibleId[1] === 0 || visibleId[0] === "top") {
+          setActive("");
+          return;
         }
+
+        setActive(
+          visibleId[0] === "collaborations" || visibleId[0] === "work"
+            ? "work"
+            : visibleId[0],
+        );
       },
-      { rootMargin: "-40% 0px -45% 0px", threshold: [0, 0.25, 0.6] },
+      { rootMargin: "-28% 0px -58% 0px", threshold: [0, 0.01, 0.1, 0.25] },
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -44,6 +57,37 @@ export function SiteNav() {
     return () => {
       document.body.style.overflow = "";
     };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const focusable = Array.from(
+      menuRef.current?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ?? [],
+    );
+    focusable[0]?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        window.requestAnimationFrame(() => toggleRef.current?.focus());
+        return;
+      }
+
+      if (event.key !== "Tab" || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [open]);
 
   return (
@@ -72,6 +116,7 @@ export function SiteNav() {
           aria-label={open ? "Close navigation" : "Open navigation"}
           className="menu-toggle"
           onClick={() => setOpen((current) => !current)}
+          ref={toggleRef}
           type="button"
         >
           <span />
@@ -87,6 +132,10 @@ export function SiteNav() {
             exit={{ opacity: 0 }}
             id="mobile-menu"
             initial={reduceMotion ? false : { opacity: 0 }}
+            aria-label="Site navigation"
+            aria-modal="true"
+            ref={menuRef}
+            role="dialog"
           >
             <p>BRAND STORYTELLER / PORTFOLIO</p>
             <nav aria-label="Mobile navigation">

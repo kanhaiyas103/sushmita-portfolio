@@ -1,79 +1,50 @@
+"use client";
+
 import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
 import type { Project } from "@/data/projects";
-
-const visualLabels: Record<string, [string, string, string]> = {
-  makemytrip: [
-    "DESTINATION DISCOVERY / BAKU, ALMATY & HONG KONG",
-    "TRAVEL SEARCH MODULE",
-    "DESTINATION RECOMMENDATIONS",
-  ],
-  spectra: [
-    "DIGITAL PUBLICATION PLACEMENTS",
-    "SOCIAL & CONTEXTUAL EXECUTIONS",
-    "PEOPLE-LED COMMUNICATION",
-  ],
-  "startup-india": [
-    "VIDEO-LED COMMUNICATION",
-    "INNOVATION SUMMIT / JANUARY 2023",
-    "SELECTED STARTUP INDIA OUTPUTS",
-  ],
-  "spec-ads": [
-    "CREATIVE EXPLORATION / SELECTED BRIEFS",
-    "TRAVEL & VOICE-LED DATING CONCEPTS",
-    "EXTRATERRESTRIAL TOURISM / CONCEPT COPY",
-  ],
-};
+import { useState } from "react";
 
 export function CaseVisuals({ project }: { project: Project }) {
-  const labels = visualLabels[project.slug];
-  const secondaryImage = project.gallery[1] ?? project.heroImage;
+  const [focusedFrame, setFocusedFrame] = useState<number | null>(null);
 
   return (
-    <div className={`execution-layout execution-layout--${project.slug}`}>
-      <Reveal className="execution-lead">
-        <figure>
-          <div className="execution-frame execution-frame--lead">
-            <Image
-              alt={`${project.alt} — overview`}
-              fill
-              sizes="(max-width: 768px) 100vw, 92vw"
-              src={project.gallery[0] ?? project.heroImage}
-            />
-          </div>
-          <figcaption>{labels[0]}</figcaption>
-        </figure>
-      </Reveal>
-
-      <div className="execution-details">
-        <Reveal className="execution-detail execution-detail--one">
+    <div
+      className={`execution-layout execution-layout--${project.slug} execution-visual-grid`}
+    >
+      {project.gallery.map((visual, index) => (
+        <Reveal
+          className={`execution-visual execution-visual--${visual.aspect}${index === 0 ? " is-featured" : ""}`}
+          delay={Math.min(index * 0.05, 0.15)}
+          key={visual.src}
+        >
           <figure>
-            <div className="execution-frame">
+            <button
+              aria-label={`Focus ${visual.label}`}
+              aria-pressed={focusedFrame === index}
+              className={`execution-frame execution-frame--focusable${focusedFrame === index ? " is-focused" : ""}`}
+              onClick={() =>
+                setFocusedFrame((current) => (current === index ? null : index))
+              }
+              type="button"
+            >
               <Image
-                alt={`${project.alt} — detail one`}
+                alt={visual.alt}
                 fill
-                sizes="(max-width: 768px) 92vw, 52vw"
-                src={project.heroImage}
+                sizes="(max-width: 700px) calc(100vw - 44px), (max-width: 1000px) 86vw, 58vw"
+                src={visual.src}
               />
-            </div>
-            <figcaption>{labels[1]}</figcaption>
+            </button>
+            <figcaption>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <strong>{visual.label}</strong>
+                <p>{visual.description}</p>
+              </div>
+            </figcaption>
           </figure>
         </Reveal>
-
-        <Reveal className="execution-detail execution-detail--two" delay={0.08}>
-          <figure>
-            <div className="execution-frame">
-              <Image
-                alt={`${project.alt} — detail two`}
-                fill
-                sizes="(max-width: 768px) 84vw, 38vw"
-                src={secondaryImage}
-              />
-            </div>
-            <figcaption>{labels[2]}</figcaption>
-          </figure>
-        </Reveal>
-      </div>
+      ))}
     </div>
   );
 }
