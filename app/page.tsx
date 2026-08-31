@@ -148,7 +148,7 @@ export default function Home() {
           </Reveal>
           <div className="brands-heading__copy">
             <p className="brands-heading__lead">
-              Brands, teams and stories I&apos;ve worked with.
+              Brands and teams I&apos;ve worked with.
             </p>
             <p>
               A selection of organizations and brands represented across

@@ -221,20 +221,20 @@ export const projects: Project[] = [
     heroImage: "/images/portfolio/spec-ads.jpeg",
     gallery: [
       {
-        src: "/images/portfolio/spec-indigo-comment.jpeg",
-        alt: "IndiGo recognition comment for the creative flight-fare concept",
-        label: "LINKEDIN COMMENT / INDIGO RECOGNITION",
-        description:
-          "IndiGo recognized the creative on the LinkedIn post with a public comment, giving clear social proof for the idea.",
-        aspect: "wide",
-      },
-      {
         src: "/images/portfolio/spec-indigo.jpeg",
         alt: "IndiGo speculative advertisement about spending more on experiences",
         label: "TRAVEL HEADLINE / INDIGO",
         description:
           "Brief: celebrate IndiGo’s lowest fares. Response: “Spend more on experiences than on tickets.”",
         aspect: "portrait",
+      },
+      {
+        src: "/images/portfolio/spec-indigo-comment.jpeg",
+        alt: "IndiGo publicly commenting in recognition of the flight-fare concept above",
+        label: "INDIGO RECOGNITION / LINKEDIN",
+        description:
+          "IndiGo publicly recognised the headline above on LinkedIn — “ideas taking flight” — a clear, unprompted response to the concept.",
+        aspect: "wide",
       },
       {
         src: "/images/portfolio/spec-bumble.jpeg",

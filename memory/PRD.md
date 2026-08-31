@@ -30,6 +30,25 @@ Refine/polish (not rebuild). Preserve structure, content, and all 4 case-study r
 - Styles: `globals.css` + `theme-reference.css` + **`portfolio.css` (loaded LAST =
   authoritative palette + Selected Work rail + About portrait)**.
 
+## Done (2026-06 pass 2 — case-study refinement)
+- **Removed "stories"** from the Collaborations line (`app/page.tsx`): now "Brands and
+  teams I've worked with."
+- **Spec Ads clarity**: reordered `data/projects.ts` gallery so the actual IndiGo
+  creative ("Spend more on experiences than on tickets") leads, with the IndiGo
+  LinkedIn recognition comment placed directly after it and re-captioned to reference
+  the creative — so the "IndiGo commented" screenshot now reads in context. The home
+  rail card also now leads with the real creative image (was the out-of-context comment).
+- **Case-study proportions tightened** (authoritative block in `portfolio.css`, wins over
+  the calibration block): smaller case hero title, medium running-narrative text, the
+  COPY line as the single hero moment, smaller section headings, tighter spacing, and
+  controlled/centered execution plates (featured portrait/square = `4 / span 6`, wide =
+  `2 / span 8`) so nothing feels oversized. Spec Ads wide recognition image spans wide
+  and sits with the creative.
+- Verified: ESLint ✓, tsc ✓ (after clean rebuild), production build ✓, all 4 case routes
+  200 on the PUBLIC URL. Desktop visuals verified for case story + execution via a temp
+  preview (since the screenshot tool only captures page-top). Mobile not visually
+  confirmed (code: featured plates collapse to full width, narrative max-width removed).
+
 ## Done (2026-06 pass 1)
 - **Deterministic black + yellow palette.** Fixed the two leftover teal `--aqua`
   values in `globals.css` (#43bdbd / #3fc1c3 → #f5c518); authoritative palette now
