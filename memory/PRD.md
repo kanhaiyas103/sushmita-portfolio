@@ -30,6 +30,26 @@ Refine/polish (not rebuild). Preserve structure, content, and all 4 case-study r
 - Styles: `globals.css` + `theme-reference.css` + **`portfolio.css` (loaded LAST =
   authoritative palette + Selected Work rail + About portrait)**.
 
+## Done (2026-06 pass 3 — copy hero, proportion, archive, mobile)
+- **Case-study COPY = hero moment**: `CaseStory.tsx` renders the real supplied
+  `featuredLine` as a large blockquote with a yellow left-border accent + "SUPPLIED
+  CAMPAIGN LINE" caption. Verified larger than narrative (46.4px vs 24.8px desktop).
+  No invented copy — uses existing `featuredLine` per project.
+- **Global proportion pass**: `portfolio.css` overrides the display-size vars at
+  ≥701px (major 3.95 / section 3.4 / transition 5.4rem) + brands/contact headings, for
+  a clear HERO > SECTION > TITLE > BODY > META hierarchy. Palette untouched.
+- **Collaborations = indexed archive**: `BrandMarquee.tsx` adds numbered entries
+  (01–13) via `.brand-unit__no`; "FROM THE ARCHIVE — 13 ENTRIES" metadata. Still before
+  Selected Work; real logos; restrained marquee kept.
+- **Mobile polish (375/390)**: fixed nav-link clipping (PHILOSOPHY no longer cut),
+  menu-toggle now 44×44 with `data-testid` + `aria-expanded`, rail card widths reduced
+  (74vw / 72vw) so the next card peeks. Verified by testing_agent (iteration_4: 12/12
+  pass, no horizontal overflow at 375/390, rail swipe works, portrait not clipped).
+- Verified: ESLint ✓, tsc ✓, production build ✓, all 4 case routes 200 on PUBLIC URL.
+- KNOWN (pre-existing, not this pass): in the TESTING sandbox the Startup India YouTube
+  embeds show "Video unavailable" — likely third-party embed blocking in that
+  environment, not a code defect; should render on a normal browser. Verify if needed.
+
 ## Done (2026-06 pass 2 — case-study refinement)
 - **Removed "stories"** from the Collaborations line (`app/page.tsx`): now "Brands and
   teams I've worked with."

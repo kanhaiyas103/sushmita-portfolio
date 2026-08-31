@@ -158,7 +158,7 @@ export default function Home() {
         </div>
 
         <p className="brands-archive-note">
-          <span>FROM THE ARCHIVE</span>
+          <span>FROM THE ARCHIVE — 13 ENTRIES</span>
           Each mark holds a different audience, voice and story.
         </p>
 

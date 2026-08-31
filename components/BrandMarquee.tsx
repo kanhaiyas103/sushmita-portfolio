@@ -32,12 +32,14 @@ const scale = 0.44;
 
 function BrandUnit({
   activeName,
+  archiveNo,
   brand,
   duplicate = false,
   onActivate,
   onDeactivate,
 }: {
   activeName: string | null;
+  archiveNo: number;
   brand: BrandCrop;
   duplicate?: boolean;
   onActivate: (name: string) => void;
@@ -54,6 +56,9 @@ function BrandUnit({
 
   const content = (
     <>
+      <span className="brand-unit__no" aria-hidden="true">
+        {String(archiveNo).padStart(2, "0")}
+      </span>
       <div
         aria-label={duplicate ? undefined : `${brand.name} logo`}
         className="brand-unit__crop"
@@ -106,22 +111,26 @@ export function BrandMarquee() {
       className={`brand-marquees${activeName ? " has-active" : ""}`}
       aria-label="Selected collaborations and portfolio work"
     >
-      {brandRows.map((brands, rowIndex) => (
-        <div className={`marquee marquee--${rowIndex === 0 ? "left" : "right"}`} key={rowIndex}>
-          <div className="marquee__track">
-            {[...brands, ...brands].map((brand, index) => (
-              <BrandUnit
-                activeName={activeName}
-                brand={brand}
-                duplicate={index >= brands.length}
-                key={`${brand.name}-${index}`}
-                onActivate={setActiveName}
-                onDeactivate={() => setActiveName(null)}
-              />
-            ))}
+      {brandRows.map((brands, rowIndex) => {
+        const offset = rowIndex === 0 ? 0 : brandRows[0].length;
+        return (
+          <div className={`marquee marquee--${rowIndex === 0 ? "left" : "right"}`} key={rowIndex}>
+            <div className="marquee__track">
+              {[...brands, ...brands].map((brand, index) => (
+                <BrandUnit
+                  activeName={activeName}
+                  archiveNo={(index % brands.length) + 1 + offset}
+                  brand={brand}
+                  duplicate={index >= brands.length}
+                  key={`${brand.name}-${index}`}
+                  onActivate={setActiveName}
+                  onDeactivate={() => setActiveName(null)}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

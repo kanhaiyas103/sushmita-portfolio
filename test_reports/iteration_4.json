@@ -1,0 +1,23 @@
+{
+  "summary": "Focused frontend retest on the public production URL of three mobile-polish fixes (mobile nav clipping, menu-toggle touch target, rail next-card peek) plus two regressions (no horizontal overflow on / and /work/spec-ads, desktop rail + Collaborations archive). ALL checks PASSED. No code changes made.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Homepage .work-rail @390 and @375", "issues": ["Next-card peek is present but narrower than the main agent's expected 350-375px left offset: cards[1].left = 378.21 at 390 wide (~12px sliver) and 364.25 at 375 wide (~11px sliver). Functionally an affordance sliver exists (verified visually in screenshot), just tighter than spec'd. Cosmetic only."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Optional: if a wider next-card peek is desired on mobile, reduce --card-w or the track gap slightly so cards[1].left lands near 355-365 at 390 wide (currently 378)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped per request)", "frontend": "100% (12/12 checks passed)"},
+  "seed_data_creation": "None",
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Measured values: FIX1 mobile menu links at 375 -> all links left=20 right=355 (innerWidth 375, font-size 41.25px); at 390 -> left=20 right=370 (font-size 42.9px); 'PHILOSOPHY' NOT clipped at either width. FIX2 [data-testid=menu-toggle] offsetWidth=44 offsetHeight=44 at both 375 and 390; aria-expanded flips false->true on tap. FIX3 @390: card widths 296/267, card[0] left=47 right=343.39, card[1] left=378.21 (<390 => peek OK); @375: card[0] left=45 right=330, card[1] left=364.25 (<375 OK). Horizontal swipe on .work-rail__track changed .work-rail__count b from 01 -> 02 at both widths. REGRESSION overflow: document.documentElement.scrollWidth == body.scrollWidth == innerWidth on homepage (375/390) and /work/spec-ads (375/390). COPY line 'Spend more on experiences than on tickets' fully visible on /work/spec-ads: @390 left=41 right=371; @375 left=41 right=356. DESKTOP @1440: rail next 01->02, prev back to 01; Collaborations section contains all numbered entries 01..13. No console errors/warnings surfaced during the run. Use wait_until='domcontentloaded' for case pages.",
+  "rca_of_the_issue": "N/A - all reported iteration_3 mobile issues are resolved."
+}

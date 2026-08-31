@@ -642,3 +642,139 @@
   }
 }
 
+/* ==========================================================================
+   PASS 3 — proportion pass, COPY hero moment, Collaborations archive, mobile
+   ========================================================================== */
+
+/* --- Global proportion: clearer BIG > MAJOR > SECTION hierarchy (desktop) --- */
+@media (min-width: 701px) {
+  :root {
+    --display-major-size: clamp(2.5rem, 3.7vw, 3.95rem);
+    --display-section-size: clamp(2.3rem, 3.3vw, 3.4rem);
+    --display-transition-size: clamp(3.1rem, 5.4vw, 5.4rem);
+  }
+
+  .brands-heading h2 {
+    font-size: clamp(2.5rem, 3.7vw, 3.95rem);
+  }
+
+  .contact h2 {
+    font-size: clamp(2.7rem, 4.4vw, 4.6rem);
+  }
+
+  /* COPY is the case-study hero moment — larger than narrative, below the title */
+  .case-story__stage--copy blockquote {
+    font-size: clamp(2.4rem, 4.4vw, 4.4rem);
+  }
+}
+
+/* --- COPY hero band (all widths) --- */
+.case-story__stage--copy {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.case-story__copy {
+  border-left: 2px solid var(--aqua);
+  padding-left: clamp(16px, 2vw, 30px);
+}
+
+.case-story__stage--copy blockquote {
+  font-size: clamp(2rem, 6vw, 2.9rem);
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+  margin: 0;
+  max-width: 20ch;
+}
+
+.case-story__copy-note {
+  color: var(--theme-muted);
+  display: inline-block;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  margin-top: clamp(16px, 1.8vw, 24px);
+}
+
+/* --- Collaborations: indexed creative archive --- */
+.brand-unit__no {
+  color: rgba(17, 17, 17, 0.42);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
+  transition: color 260ms ease;
+}
+
+.brand-unit.is-active .brand-unit__no {
+  color: rgba(17, 17, 17, 0.85);
+}
+
+.brands-archive-note span {
+  color: var(--aqua);
+}
+
+/* --- Mobile polish (375 / 390) --- */
+@media (max-width: 700px) {
+  .work-rail {
+    --card-w: 74vw;
+  }
+
+  /* comfortable touch targets on the rail controls */
+  .work-rail__buttons button {
+    height: 48px;
+    width: 58px;
+  }
+
+  .work-rail__dot {
+    height: 16px;
+    padding: 6px 0;
+  }
+
+  /* larger, accessible header menu toggle */
+  .menu-toggle {
+    height: 44px;
+    width: 44px;
+  }
+
+  /* mobile menu links must fit the viewport (no clipping of long words) */
+  .mobile-menu {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .mobile-menu nav a {
+    font-size: clamp(2rem, 11vw, 3.1rem);
+    letter-spacing: -0.04em;
+    overflow-wrap: anywhere;
+  }
+
+  .mobile-menu nav a span {
+    margin-right: 12px;
+  }
+
+  /* keep the copy hero readable, not oversized, on small screens */
+  .case-story__stage--copy blockquote {
+    font-size: clamp(1.9rem, 8vw, 2.5rem);
+    max-width: none;
+  }
+
+  .case-story__copy {
+    padding-left: 14px;
+  }
+
+  /* prevent any accidental horizontal bleed from the archive tiles */
+  .brand-unit {
+    flex-basis: 62vw;
+  }
+}
+
+@media (max-width: 420px) {
+  .work-rail {
+    --card-w: 72vw;
+  }
+
+  .work-rail__count b {
+    font-size: 1.5rem;
+  }
+}
+
+

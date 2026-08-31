@@ -74,7 +74,16 @@ export function CaseStory({ project }: { project: Project }) {
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <h3 id={`case-stage-${project.slug}-${index}`}>{stage.label}</h3>
               </div>
-              {stage.isCopy ? <blockquote>{stage.content}</blockquote> : <p>{stage.content}</p>}
+              {stage.isCopy ? (
+                <div className="case-story__copy">
+                  <blockquote>{stage.content}</blockquote>
+                  <span className="case-story__copy-note">
+                    SUPPLIED CAMPAIGN LINE
+                  </span>
+                </div>
+              ) : (
+                <p>{stage.content}</p>
+              )}
             </motion.article>
           ))}
         </div>

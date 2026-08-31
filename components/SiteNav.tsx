@@ -115,6 +115,7 @@ export function SiteNav() {
           aria-expanded={open}
           aria-label={open ? "Close navigation" : "Open navigation"}
           className="menu-toggle"
+          data-testid="menu-toggle"
           onClick={() => setOpen((current) => !current)}
           ref={toggleRef}
           type="button"

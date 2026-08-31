@@ -1,0 +1,34 @@
+{
+  "summary": "Frontend-only refinement retest on the public production URL. Verified: (1) CaseStory COPY hero on all 4 case pages — exact supplied lines render in a blockquote with yellow left border (2px rgb(245,197,24)) + 'SUPPLIED CAMPAIGN LINE' caption; desktop font-size 46.4px vs 24.8px for normal stage <p> (mobile 390: 31.2px vs 19.2px; 375 makemytrip: 30.4px). (2) Collaborations archive renders numbered .brand-unit__no 01..13 (duplicates for marquee loop are aria-hidden), meta text 'FROM THE ARCHIVE — 13 ENTRIES' present, real brand names present, and #collaborations precedes #work in the DOM. (3) Selected Work rail regression passed: next/prev advance 01->04, active .work-card gains is-active, PREV disabled at 01 / NEXT disabled at 04, ArrowRight/ArrowLeft work while a rail button has focus, mouse-drag of ~720px (card width 700px desktop) snaps 01->02. (4) MOBILE 390x844 and 375x812: no horizontal overflow anywhere tested (documentElement.scrollWidth == body.scrollWidth == innerWidth on homepage, /work/spec-ads, /work/makemytrip); rail swipe changes active project (01->02); rail buttons 48px tall (>=44); about portrait 344x430, radius 0, object-fit cover, not clipped; spec-ads copy line fully visible. (5) Palette scan of all loaded stylesheets found zero cyan/teal/blue/purple accent declarations. Zero console errors / pageerrors on every route tested.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Mobile nav panel (site-nav panel links)", "issue": "Mobile menu link rows overflow the viewport: at 375px each link's boundingRect.right = 385 (10px past innerWidth 375) and at 390px the 'PHILOSOPHY' word is visibly cut off at the right edge (page-level scroll is hidden so no scrollbar appears, but text is clipped/unreadable at its end). Affects 375 and 390.", "selector": ".site-nav__panel a / mobile menu links", "priority": "MEDIUM"},
+      {"component": "Header menu toggle", "issue": "Touch target is 38x38px at both 375 and 390 — below the 44px minimum. Also no aria-expanded attribute is set on the toggle (aria-expanded returned null after opening), so screen readers get no open/closed state.", "selector": "[data-testid=menu-toggle]", "priority": "MEDIUM"},
+      {"component": "ProjectRail (mobile peek)", "issue": "At 390px the NEXT card is NOT partially visible at index 01: card width 328px (84vw) but cards[1].getBoundingClientRect().left = 395 (> innerWidth 390), giving 0 visible px (-5). The requested '~82vw + peek of next card' affordance is missing; reduce card width or track padding to expose ~20-30px of the next card.", "selector": ".work-rail__track .work-card", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/work/startup-india (Selected Previews)", "issues": ["All three YouTube embeds render 'Video unavailable — This content isn't available.' (desktop 1920). May be embed-blocking in this environment, but the video IDs / privacy settings should be verified since the whole previews section reads as broken."]},
+      {"screen": "Homepage /work/startup-india load", "issues": ["/work/startup-india once exceeded a 30s networkidle navigation timeout (embedded YouTube iframes keep the network busy); it loaded fine with domcontentloaded and on retry. Non-blocking, but the third-party iframes delay 'idle'."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Fix mobile nav panel horizontal clipping (links extend 10px past viewport; 'PHILOSOPHY' cut off at 375/390) — reduce panel font-size/padding or allow wrapping.",
+    "Increase menu-toggle touch target to >=44px and add aria-expanded state.",
+    "Optional: expose a peek of the next work card on mobile (currently next card starts beyond the right edge at 390px).",
+    "Verify the startup-india YouTube video IDs / embed permissions — all three previews show 'Video unavailable'."
+  ],
+  "critical_code_review_comments": [
+    "BrandMarquee duplicates each row for the marquee loop, so .brand-unit__no values 01..13 each appear twice in the DOM (duplicates are correctly aria-hidden) — fine for a11y, but any test/count logic must de-duplicate.",
+    "ProjectRail keyboard handling is bound to the rail container, so once NEXT becomes disabled at 04 focus is dropped to <body> and subsequent ArrowLeft is ignored; consider moving focus to the still-enabled sibling button when the active one becomes disabled."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (no backend)", "frontend": "~92% (all 6 requested feature areas verified; 3 mobile polish defects found)"},
+  "seed_data_creation": "None — static site",
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Rail card class is .work-card (NOT .work-rail__card). Desktop card width is 700px so a mouse drag must exceed ~350px to snap; use ~700px. Use wait_until='domcontentloaded' for /work/startup-india (YouTube iframes block networkidle). Verified values: copy blockquote 46.4px desktop / 31.2px @390 vs stage p 24.8px / 19.2px; rail buttons 48px tall; no horizontal overflow at 375 or 390 on home, /work/spec-ads, /work/makemytrip. Remaining open issues: mobile nav link clipping (right=385 vs 375), 38px menu toggle, no next-card peek at 390.",
+  "rca_of_the_issue": "Mobile nav clipping: the nav panel link typography scales with viewport width but the row container has no wrapping/clamp, so the label box computes 10px wider than the viewport; page-level overflow is hidden which masks the scrollbar while the glyphs are still cut. Next-card peek missing: card width 84vw plus track gap/padding pushes cards[1].left to 395px at innerWidth 390, i.e. exactly off-screen."
+}
