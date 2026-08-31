@@ -3,7 +3,7 @@
 :root {
   --ink: #171817;
   --paper: #f7f5f0;
-  --aqua: #43bdbd;
+  --aqua: #f5c518;
   --warm-grey: #e8e4dc;
   --white: #ffffff;
 }
@@ -2892,7 +2892,7 @@ body {
 :root {
   --ink: #111111;
   --paper: #f2f0ea;
-  --aqua: #3fc1c3;
+  --aqua: #f5c518;
   --warm-grey: #a8a6a0;
   --white: #f2f0ea;
   --theme-dark: #111111;

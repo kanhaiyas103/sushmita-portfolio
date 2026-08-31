@@ -116,7 +116,7 @@ export default function Home() {
                 <div className="about-portrait__media">
                   <Image
                     className="about-portrait__image"
-                    src="/images/portfolio/sushmita-portrait-cutout.png"
+                    src="/images/portfolio/sushmita-portrait.jpeg"
                     alt="Portrait of Sushmita Nanda"
                     fill
                     sizes="(max-width: 700px) calc(100vw - 44px), (max-width: 980px) calc(100vw - 80px), (max-width: 1320px) 62vw, 780px"

@@ -1,0 +1,530 @@
+/*
+ * portfolio.css — loaded last, so it is the single authoritative source for
+ * the black + warm-yellow editorial palette (deterministic, not import-order
+ * dependent) and for the Selected Work rail.
+ */
+
+:root {
+  --ink: #0f0f0e;
+  --paper: #f4f1ea;
+  --aqua: #f5c518;
+  --gold-deep: #d9a400;
+  --warm-grey: #6f6a60;
+  --white: #f4f1ea;
+  --theme-dark: #0e0e0d;
+  --theme-dark-secondary: #161513;
+  --theme-warm: #f4f1ea;
+  --theme-muted: #9b968c;
+  --theme-line: #2b2926;
+  --layout-edge: clamp(22px, 4vw, 68px);
+}
+
+/* ==========================================================================
+   SELECTED WORK — editorial, drag-driven project archive
+   ========================================================================== */
+
+.work-rail {
+  --card-w: clamp(300px, 62vw, 700px);
+  position: relative;
+}
+
+.work-rail__head {
+  align-items: flex-end;
+  border-top: 1px solid var(--theme-line);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: clamp(22px, 2.6vw, 38px);
+  padding-top: 14px;
+}
+
+.work-rail__cue {
+  align-items: center;
+  color: var(--theme-muted);
+  display: inline-flex;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.62rem;
+  gap: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.work-rail__cue i {
+  animation: work-cue 2.6s cubic-bezier(0.2, 0.7, 0.2, 1) infinite;
+  background: var(--aqua);
+  display: block;
+  height: 2px;
+  width: 30px;
+}
+
+@keyframes work-cue {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(10px);
+  }
+}
+
+.work-rail__nav {
+  align-items: flex-end;
+  display: flex;
+  gap: clamp(20px, 3vw, 46px);
+}
+
+.work-rail__count {
+  align-items: baseline;
+  display: flex;
+  gap: 10px;
+  margin: 0;
+}
+
+.work-rail__count b {
+  color: var(--aqua);
+  font-size: clamp(1.6rem, 2.4vw, 2.35rem);
+  font-weight: 780;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.work-rail__count span {
+  color: var(--theme-muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+}
+
+.work-rail__count em {
+  border-left: 1px solid var(--theme-line);
+  color: var(--theme-muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6rem;
+  font-style: normal;
+  letter-spacing: 0.12em;
+  margin-left: 6px;
+  padding-left: 14px;
+  text-transform: uppercase;
+}
+
+.work-rail__buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.work-rail__buttons button {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--theme-line);
+  color: var(--theme-warm);
+  cursor: pointer;
+  display: flex;
+  height: 46px;
+  justify-content: center;
+  transition: background 200ms ease, border-color 200ms ease, color 200ms ease,
+    opacity 200ms ease;
+  width: 54px;
+}
+
+.work-rail__buttons button:hover:not(:disabled),
+.work-rail__buttons button:focus-visible:not(:disabled) {
+  background: var(--aqua);
+  border-color: var(--aqua);
+  color: var(--ink);
+  outline: none;
+}
+
+.work-rail__buttons button:disabled {
+  cursor: not-allowed;
+  opacity: 0.32;
+}
+
+.work-rail__viewport {
+  cursor: grab;
+  height: clamp(540px, 66vh, 700px);
+  outline: none;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.work-rail__viewport:active {
+  cursor: grabbing;
+}
+
+.work-rail__viewport:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--aqua);
+}
+
+.work-rail__track {
+  display: flex;
+  gap: clamp(20px, 2.4vw, 40px);
+  height: 100%;
+  padding: 6px 0;
+  width: max-content;
+  will-change: transform;
+}
+
+.work-card {
+  background: var(--theme-dark-secondary);
+  border: 1px solid var(--theme-line);
+  display: grid;
+  flex: 0 0 var(--card-w);
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  height: 100%;
+  margin: 0;
+  opacity: 0.4;
+  overflow: hidden;
+  padding: clamp(16px, 1.5vw, 24px);
+  transform: scale(0.9);
+  transform-origin: center;
+  transition: opacity 520ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 520ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 520ms ease;
+  user-select: none;
+  will-change: transform, opacity;
+}
+
+.work-card.is-active {
+  border-color: color-mix(in srgb, var(--aqua) 46%, var(--theme-line));
+  opacity: 1;
+  transform: scale(1);
+}
+
+.work-card.is-active::before {
+  background: var(--aqua);
+}
+
+.work-card__id {
+  align-items: center;
+  border-bottom: 1px solid var(--theme-line);
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: clamp(12px, 1.2vw, 18px);
+}
+
+.work-card__brand {
+  transform: translateX(-4px);
+  transition: transform 520ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.work-card.is-active .work-card__brand {
+  transform: translateX(0);
+}
+
+.work-card__brand .project-mark {
+  background: var(--theme-warm);
+  border-color: transparent;
+}
+
+.work-card__brand .project-mark small {
+  display: none;
+}
+
+.work-card__num {
+  color: transparent;
+  font-size: clamp(2.4rem, 3.4vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 0.7;
+  -webkit-text-stroke: 1px var(--theme-line);
+  transition: -webkit-text-stroke-color 520ms ease, color 520ms ease;
+}
+
+.work-card.is-active .work-card__num {
+  -webkit-text-stroke-color: color-mix(in srgb, var(--aqua) 60%, transparent);
+  color: color-mix(in srgb, var(--aqua) 12%, transparent);
+}
+
+.work-card__title {
+  padding: clamp(16px, 1.6vw, 24px) 0 clamp(14px, 1.4vw, 20px);
+}
+
+.work-card__cat {
+  color: var(--theme-muted);
+  display: block;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.work-card.is-active .work-card__cat {
+  color: var(--aqua);
+}
+
+.work-card__title h3 {
+  color: var(--theme-warm);
+  font-size: clamp(2rem, 3.4vw, 3.35rem);
+  font-weight: 780;
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+  margin: 0;
+}
+
+.work-card__frame {
+  background: var(--theme-dark);
+  border: 1px solid var(--theme-line);
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.work-card__frame img {
+  object-fit: cover;
+  transform: scale(1.001);
+  transition: transform 720ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 520ms ease;
+}
+
+.work-card:not(.is-active) .work-card__frame img {
+  filter: grayscale(0.55) brightness(0.72);
+}
+
+.work-card.is-active:hover .work-card__frame img,
+.work-card.is-active:focus-within .work-card__frame img {
+  transform: scale(1.045);
+}
+
+.work-card__tag {
+  background: color-mix(in srgb, var(--ink) 78%, transparent);
+  bottom: 0;
+  color: var(--theme-warm);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.54rem;
+  left: 0;
+  letter-spacing: 0.12em;
+  opacity: 0;
+  padding: 9px 12px;
+  position: absolute;
+  transform: translateY(6px);
+  transition: opacity 420ms ease, transform 420ms ease;
+}
+
+.work-card.is-active .work-card__tag {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.work-card__foot {
+  align-items: end;
+  display: grid;
+  gap: clamp(16px, 2vw, 34px);
+  grid-template-columns: minmax(0, 1fr) auto;
+  opacity: 0;
+  padding-top: clamp(16px, 1.6vw, 24px);
+  transform: translateY(8px);
+  transition: opacity 520ms ease, transform 520ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.work-card.is-active .work-card__foot {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.work-card__foot p {
+  color: var(--theme-muted);
+  font-size: clamp(0.9rem, 1vw, 1.02rem);
+  line-height: 1.5;
+  margin: 0;
+  max-width: 46ch;
+}
+
+.work-card__cta {
+  align-items: center;
+  border-bottom: 1px solid currentColor;
+  color: var(--theme-warm);
+  display: inline-flex;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  gap: 12px;
+  letter-spacing: 0.12em;
+  padding-bottom: 6px;
+  transition: color 220ms ease, gap 220ms ease;
+  white-space: nowrap;
+}
+
+.work-card__cta span {
+  transition: transform 260ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.work-card__cta:hover,
+.work-card__cta:focus-visible {
+  color: var(--aqua);
+  gap: 18px;
+}
+
+.work-card__cta:hover span,
+.work-card__cta:focus-visible span {
+  transform: translateX(4px);
+}
+
+.work-rail__progress {
+  display: flex;
+  gap: 10px;
+  margin-top: clamp(24px, 2.6vw, 40px);
+}
+
+.work-rail__dot {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  height: 12px;
+  padding: 4px 0;
+  width: clamp(34px, 5vw, 58px);
+}
+
+.work-rail__dot span {
+  background: var(--theme-line);
+  display: block;
+  height: 2px;
+  transition: background 320ms ease;
+  width: 100%;
+}
+
+.work-rail__dot.is-active span {
+  background: var(--aqua);
+}
+
+@media (max-width: 900px) {
+  .work-rail {
+    --card-w: clamp(280px, 74vw, 560px);
+  }
+
+  .work-rail__viewport {
+    height: clamp(520px, 92vw, 640px);
+  }
+}
+
+@media (max-width: 700px) {
+  .work-rail {
+    --card-w: 84vw;
+  }
+
+  .work-rail__head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .work-rail__nav {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .work-rail__viewport {
+    height: clamp(500px, 128vw, 600px);
+  }
+
+  .work-card__foot {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .work-card__foot p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-rail__cue i {
+    animation: none;
+  }
+
+  .work-card,
+  .work-card__frame img,
+  .work-card__foot,
+  .work-card__brand {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   ABOUT — portrait as a sharp, naturally cropped editorial image
+   ========================================================================== */
+
+.about-portrait-frame {
+  align-self: end;
+  width: min(100%, 520px);
+}
+
+.about-portrait,
+.about-portrait__media {
+  background: var(--theme-dark-secondary);
+  border: 0;
+  overflow: hidden;
+}
+
+.about-portrait__media {
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--theme-line);
+  border-bottom: 2px solid var(--aqua);
+  position: relative;
+}
+
+.about-portrait__media::before,
+.about-portrait__media::after {
+  display: none;
+}
+
+.about-portrait__image {
+  filter: grayscale(0.15) contrast(1.02);
+  mix-blend-mode: normal;
+  object-fit: cover;
+  object-position: center 22%;
+  transform: none;
+}
+
+.about-portrait__caption {
+  align-items: baseline;
+  color: var(--theme-muted);
+  display: flex !important;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.58rem;
+  justify-content: space-between;
+  letter-spacing: 0.12em;
+  margin-top: 12px;
+  text-transform: uppercase;
+}
+
+.about-portrait__caption span:first-child {
+  color: var(--aqua);
+}
+
+@media (max-width: 980px) {
+  .about-portrait-frame {
+    width: min(70%, 520px);
+  }
+}
+
+@media (max-width: 700px) {
+  .about-portrait-frame {
+    width: 100%;
+  }
+
+  .about-portrait__media {
+    aspect-ratio: 4 / 5;
+  }
+
+  .about-portrait__image {
+    object-position: center 20%;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Editorial refinements — restrained, hierarchy-forward
+   ========================================================================== */
+
+.works-transition h2 span,
+.hero h1 span:last-child {
+  -webkit-text-stroke-color: var(--aqua);
+}
+
+/* keep the collaborations logo tiles legible on the dark archive */
+.brand-unit__crop {
+  filter: contrast(1.02);
+}
