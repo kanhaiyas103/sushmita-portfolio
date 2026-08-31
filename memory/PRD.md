@@ -30,6 +30,30 @@ Refine/polish (not rebuild). Preserve structure, content, and all 4 case-study r
 - Styles: `globals.css` + `theme-reference.css` + **`portfolio.css` (loaded LAST =
   authoritative palette + Selected Work rail + About portrait)**.
 
+## Done (2026-06 pass 4 — alternating case-study story + portrait)
+- **New `components/CaseFlow.tsx`** replaces the gallery-style `CaseStory` + `CaseVisuals`
+  in `app/work/[slug]/page.tsx`. Case studies now read as an ALTERNATING editorial story:
+  BRIEF (lead) → THINKING (image+text pair) → COPY (dominant hero moment, supplied
+  `featuredLine`) → EXECUTION (image/text pairs from `gallery.slice(1)`) → IMPACT.
+  Pairs alternate image-left / image-right (flex `order`) with VARIED proportions
+  (ratio-58/66/54/70/62 → media-basis %), never 50/50. Uses ONLY real supplied copy +
+  imagery; images `object-fit: contain` (no distortion). `CaseVideos` still in the hero.
+  Startup India (1 image) degrades gracefully to a coherent flow.
+- **About portrait** now fills its 4/5 frame (`object-fit: cover`, object-position
+  center 18%) — no dead space; kept the REAL photo (did NOT AI-alter her likeness).
+  Note: `sushmita-portrait-cutout.png` is actually opaque RGB (not a real cutout), so
+  transparent-background placement would need a genuine background-removal step (offered
+  as follow-up).
+- Verified by testing_agent (iteration_5, 100%): alternation L,R,L(,R) with varied
+  media widths on makemytrip/spectra/spec-ads; COPY 72px vs body 37px; labels 01–05;
+  startup-india flow ok; mobile 390/375 stacks IMG/TEXT alternating with NO horizontal
+  overflow; portrait fills frame; rail + Collaborations regression ok; palette clean;
+  0 console errors. Trimmed trailing whitespace after the IMPACT beat.
+- Unused files left in repo (not imported): `components/CaseStory.tsx`,
+  `components/CaseVisuals.tsx`.
+- KNOWN (pre-existing): Startup India YouTube embeds show "Video unavailable" in the
+  testing sandbox (embed restriction), not caused by this pass.
+
 ## Done (2026-06 pass 3 — copy hero, proportion, archive, mobile)
 - **Case-study COPY = hero moment**: `CaseStory.tsx` renders the real supplied
   `featuredLine` as a large blockquote with a yellow left-border accent + "SUPPLIED

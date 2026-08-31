@@ -1,0 +1,49 @@
+{
+  "summary": "Frontend-only retest on the PUBLIC URL of the new alternating CaseFlow layout. Verified desktop (1440) alternation + varied media proportions on /work/makemytrip, /work/spectra, /work/spec-ads; COPY hero content/size; editorial labels 01-05; startup-india single-image flow + hero videos; mobile stacking at 390x844 and 375x812 with overflow checks; About portrait fill; homepage rail + Collaborations regression; palette scan and console-error scan on all 5 routes. All requested checks PASSED.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/work/* end of CaseFlow (desktop 1440)", "issues": ["~250px of dead vertical whitespace between the '05 / THE IMPACT' text beat and the 'RETURN TO SELECTED WORK' rule; impact beat's right half is empty (max-width 40ch text in a full-width row). Cosmetic only."]},
+      {"screen": "/work/startup-india hero 'SELECTED PREVIEWS'", "issues": ["First YouTube embed renders 'Video unavailable' and the second preview tile shows a blank/grey frame (embed playback restriction on the supplied video IDs). Pre-existing, not caused by CaseFlow."]}
+    ]
+  },
+  "verified_evidence": {
+    "makemytrip_pairs": [
+      "case-beat--pair ratio-58 is-image-left | media.left=58 text.left=884 mediaW=768 order=0 -> media LEFT",
+      "case-beat--pair ratio-66 is-text-left | media.left=508 text.left=58 mediaW=874 order=2 -> media RIGHT",
+      "case-beat--pair ratio-54 is-image-left | media.left=58 text.left=831 mediaW=715 order=0 -> media LEFT"
+    ],
+    "spectra_and_specads_pairs": [
+      "ratio-58 is-image-left media.left=58 w=768 (LEFT)",
+      "ratio-66 is-text-left media.left=508 w=874 order=2 (RIGHT)",
+      "ratio-54 is-image-left media.left=58 w=715 (LEFT)",
+      "ratio-70 is-text-left media.left=455 w=927 order=2 (RIGHT)"
+    ],
+    "alternation": "sides L,R,L(,R) on all three pages - strictly alternating; media widths vary (768/874/715/927), no 50-50",
+    "copy_hero": "label '03 / THE COPY', note 'SUPPLIED CAMPAIGN LINE', blockquote text exact per project ('Explore Almaty', 'Celebrating the people powering our progress.', 'Spend more on experiences than on tickets'); blockquote font-size 72px vs .case-beat__text p 37.44px",
+    "labels": "01 / THE BRIEF, 02 / THE THINKING, 03 / THE COPY, 04 / THE EXECUTION, 05 / THE IMPACT present on all case pages",
+    "startup_india": "beats = text-lead brief, one ratio-58 is-image-left pair (thinking), COPY hero, text execution beat (04), text impact (05); zero empty beats; 4 YouTube iframes still render; scrollWidth 1440 == innerWidth",
+    "mobile_390": "all 4 pairs flex-direction:column; stack order IMG,TEXT,IMG,TEXT (alternating via order:2); mediaW=346, right=368 within 390; doc/body scrollWidth 390 == innerWidth; copy blockquote rect l=42 r=368 not clipped",
+    "mobile_375": "same: column, IMG,TEXT,IMG,TEXT, mediaW=331 right=353, scrollWidth 375 == innerWidth, copy not clipped",
+    "about_portrait": ".about-portrait__image present, object-fit 'cover', border-radius 0px, offset 518x647 filling .about-portrait__media 520x650 (1px border) - no gap, not a circular avatar",
+    "regression": "[data-testid=work-rail-next] click advances indicator to '02 / 04' and shifts .work-card rects (first card left -330); Collaborations shows numbered entries 01-13 ('FROM THE ARCHIVE - 13 ENTRIES')",
+    "palette": "DOM-wide computed-style scan for cyan/teal/blue/purple color+background+border values returned 0 violations; --aqua resolves to #f5c518 (warm yellow)",
+    "console": "0 console errors on /, /work/makemytrip, /work/spectra, /work/spec-ads, /work/startup-india"
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "CaseFlow numbering can skip: with >1 execution visual only the first gets 'THE EXECUTION' label and subsequent beats are unlabeled - intentional but means 04 appears once; verify that's desired.",
+    "Optional polish: give the trailing '.case-beat--text' impact beat less bottom margin (currently clamp up to 118px) to remove the dead space before the footer rule."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped per request)", "frontend": "100% of requested checks passed"},
+  "seed_data_creation": "None",
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_self_test": true,
+  "test_credentials": "None required",
+  "context_for_next_testing_agent": "CaseFlow alternating layout is verified working on desktop 1440 and mobile 390/375 on the public URL. Use wait_until='domcontentloaded' plus mouse.wheel scrolling to trigger Reveal animations before measuring rects. Only open cosmetic items: trailing whitespace after the impact beat and two unavailable YouTube embeds on startup-india.",
+  "rca_of_the_issue": "N/A - no functional defects reproduced this pass."
+}

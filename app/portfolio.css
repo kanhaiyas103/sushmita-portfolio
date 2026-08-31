@@ -777,4 +777,237 @@
   }
 }
 
+/* ==========================================================================
+   PASS 4 — case study as an alternating editorial story (image <-> text)
+   ========================================================================== */
+
+.case-flow {
+  padding-bottom: clamp(80px, 10vw, 150px);
+  padding-top: clamp(40px, 5vw, 72px);
+}
+
+.case-flow__intro {
+  border-top: 1px solid var(--theme-line);
+  display: grid;
+  gap: clamp(18px, 3vw, 42px);
+  grid-template-columns: 0.32fr 1.68fr;
+  padding: clamp(24px, 2.6vw, 38px) 0 clamp(46px, 6vw, 86px);
+}
+
+.case-flow__intro span {
+  color: var(--aqua);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+
+.case-flow__intro h2 {
+  font-size: clamp(1.5rem, 2.8vw, 2.6rem);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0;
+  max-width: 22ch;
+}
+
+/* --- a beat: image <-> text pair --- */
+.case-beat {
+  margin: 0 auto clamp(56px, 7vw, 118px);
+}
+
+.case-flow > .case-beat:last-child {
+  margin-bottom: clamp(12px, 1.5vw, 28px);
+}
+
+.case-beat--pair {
+  align-items: center;
+  display: flex;
+  gap: clamp(26px, 4vw, 72px);
+}
+
+.case-beat--pair .case-beat__media {
+  flex: 0 0 var(--media-basis, 58%);
+  min-width: 0;
+}
+
+.case-beat--pair .case-beat__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ratio-58 {
+  --media-basis: 58%;
+}
+.ratio-66 {
+  --media-basis: 66%;
+}
+.ratio-54 {
+  --media-basis: 54%;
+}
+.ratio-70 {
+  --media-basis: 70%;
+}
+.ratio-62 {
+  --media-basis: 62%;
+}
+
+/* image on the right (text leads) */
+.case-beat--pair.is-text-left .case-beat__media {
+  order: 2;
+}
+.case-beat--pair.is-text-left .case-beat__text {
+  order: 1;
+}
+
+/* --- media frame: preserve the artwork, never distort --- */
+.case-beat__media {
+  margin: 0;
+}
+
+.case-beat__frame {
+  background: var(--theme-warm);
+  border: 1px solid var(--theme-line);
+  overflow: hidden;
+  position: relative;
+}
+
+.case-beat__frame--wide {
+  aspect-ratio: 16 / 10;
+}
+.case-beat__frame--landscape {
+  aspect-ratio: 4 / 3;
+}
+.case-beat__frame--portrait {
+  aspect-ratio: 4 / 5;
+}
+.case-beat__frame--square {
+  aspect-ratio: 1;
+}
+
+.case-beat__frame img {
+  object-fit: contain;
+  transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.case-beat:hover .case-beat__frame img {
+  transform: scale(1.02);
+}
+
+.case-beat__media figcaption {
+  color: var(--theme-muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  margin-top: 14px;
+}
+
+/* --- text block --- */
+.case-beat__label {
+  color: var(--aqua);
+  display: block;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 18px;
+}
+
+.case-beat__text p {
+  color: var(--theme-warm);
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  line-height: 1.5;
+  margin: 0;
+  max-width: 40ch;
+}
+
+/* --- text-only beats (brief lead + impact) --- */
+.case-beat--text {
+  max-width: 940px;
+}
+
+.case-beat--text.is-lead .case-beat__text p {
+  color: var(--theme-warm);
+  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  max-width: 24ch;
+}
+
+/* --- COPY: the dominant editorial moment --- */
+.case-flow__copy {
+  border-left: 2px solid var(--aqua);
+  margin: clamp(46px, 7vw, 100px) 0;
+  padding-left: clamp(18px, 2.4vw, 40px);
+}
+
+.case-flow__copy .case-flow__label {
+  color: var(--aqua);
+  display: block;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 20px;
+}
+
+.case-flow__copy blockquote {
+  color: var(--theme-warm);
+  font-size: clamp(2.2rem, 5vw, 4.6rem);
+  font-weight: 640;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+  margin: 0;
+  max-width: 20ch;
+}
+
+.case-flow__copy-note {
+  color: var(--theme-muted);
+  display: inline-block;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  margin-top: clamp(18px, 2vw, 26px);
+}
+
+@media (max-width: 900px) {
+  .case-flow__intro {
+    gap: 14px;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- mobile: stack, but keep alternating order (image-first vs text-first) --- */
+@media (max-width: 700px) {
+  .case-beat--pair {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .case-beat--pair .case-beat__media,
+  .case-beat--pair .case-beat__text {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .case-beat__text p,
+  .case-beat--text.is-lead .case-beat__text p {
+    max-width: none;
+  }
+
+  .case-flow__copy blockquote {
+    font-size: clamp(1.9rem, 8vw, 2.6rem);
+    max-width: none;
+  }
+}
+
+/* --- About portrait: fill the frame, no dead space (real photo, not distorted) --- */
+.about-portrait__media {
+  aspect-ratio: 4 / 5;
+}
+
+.about-portrait__image {
+  filter: grayscale(0.12) contrast(1.03);
+  mix-blend-mode: normal;
+  object-fit: cover;
+  object-position: center 18%;
+  transform: none;
+}
+
 

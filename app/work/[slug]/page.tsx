@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CaseVideos } from "@/components/CaseVideos";
-import { CaseVisuals } from "@/components/CaseVisuals";
-import { CaseStory } from "@/components/CaseStory";
+import { CaseFlow } from "@/components/CaseFlow";
 import { ProjectMark } from "@/components/ProjectMark";
 import { Reveal } from "@/components/Reveal";
 import { SiteNav } from "@/components/SiteNav";
@@ -87,21 +86,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <CaseVideos project={project} />
         </header>
 
-        <CaseStory project={project} />
+        <CaseFlow project={project} />
 
-        <section className="case-work" aria-labelledby="selected-outputs-title">
-          <Reveal className="section-shell case-work__heading headline-reveal">
-            <span>EXECUTION / SELECTED OUTPUTS</span>
-            <h2 id="selected-outputs-title">THE WORK, IN CONTEXT.</h2>
-          </Reveal>
-
-          <div className="section-shell">
-            <CaseVisuals project={project} />
-            <Link className="return-to-work" href="/#work">
-              RETURN TO SELECTED WORK <span aria-hidden="true">↗</span>
-            </Link>
-          </div>
-        </section>
+        <div className="section-shell">
+          <Link className="return-to-work" href="/#work">
+            RETURN TO SELECTED WORK <span aria-hidden="true">↗</span>
+          </Link>
+        </div>
 
         <nav className="case-pagination" aria-label="Other case studies">
           <Link href={`/work/${neighbours.previous.slug}`}>
