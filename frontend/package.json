@@ -1,0 +1,9 @@
+{
+  "name": "frontend-launcher",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Launcher so the platform 'frontend' supervisor program serves the Next.js app that lives at /app (production build).",
+  "scripts": {
+    "start": "cd /app && exec node_modules/.bin/next start -p 3000 -H 0.0.0.0"
+  }
+}

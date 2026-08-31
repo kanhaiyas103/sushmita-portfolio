@@ -6,11 +6,18 @@ Framer Motion) at `/app` root. Keep the dark-editorial identity; palette must be
 **black + warm yellow only** (no teal/cyan/blue/purple/neon/gradients/glassmorphism).
 Refine/polish (not rebuild). Preserve structure, content, and all 4 case-study routes.
 
-## Run
-- Dev: `npx next dev -p 3000 -H 0.0.0.0` (Node 20 works; package prefers 22).
-  Supervisor's `frontend` program points at `/app/frontend` which does NOT exist here —
-  this project is Next.js at `/app` root, run manually as above.
-- Build: `npx next build`  •  Lint: `npm run lint`  •  Types: `npx tsc --noEmit`
+## Run / Serve (IMPORTANT)
+- **Serve the PUBLIC preview with a PRODUCTION build, NOT `next dev`.** The preview
+  ingress does not proxy the Next dev HMR WebSocket (`/_next/webpack-hmr` -> 502), which
+  stalls React hydration on the public URL and makes the whole site inert (this was the
+  reported "swipe not working" symptom).
+- Supervisor `frontend` program runs `yarn start` in `/app/frontend`. That dir now holds
+  a tiny launcher (`/app/frontend/package.json`) whose `start` script does
+  `cd /app && node_modules/.bin/next start -p 3000 -H 0.0.0.0`. So the platform's own
+  supervisor serves the production build and it survives restarts.
+- After ANY code change: `cd /app && npx next build && sudo supervisorctl restart frontend`.
+  (For quick local iteration only, `npx next dev` works on localhost:3000 but NOT publicly.)
+- Build: `npx next build` • Lint: `npm run lint` • Types: `npx tsc --noEmit`
 
 ## Architecture
 - `app/page.tsx` — Home: Hero → About → Collaborations → Works-transition →
@@ -40,6 +47,14 @@ Refine/polish (not rebuild). Preserve structure, content, and all 4 case-study r
   Not on the hero.
 - Verified: TypeScript ✓, ESLint ✓, production build ✓ (all 4 case routes prerender).
   Desktop visuals verified for rail / about / collaborations.
+- **Public-URL serving fixed** (was the real "swipe not working" cause): switched from
+  `next dev` to a production build served by supervisor via the `/app/frontend` launcher.
+  Testing agent confirmed 12/12 rail interactions on the PUBLIC URL (next/prev, mouse
+  drag + snap, keyboard arrows, mobile touch swipe, disabled states, all 4 case routes,
+  no horizontal page overflow, clean console).
+- **Keyboard fix**: moved the rail keydown listener from `.work-rail__viewport` to the
+  outer `.work-rail` container (`railRef`) so ArrowLeft/ArrowRight work from the nav
+  buttons (they are siblings of the viewport).
 
 ## Not yet done / backlog (P1)
 - Deeper global proportion + hierarchy pass across every section.

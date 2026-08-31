@@ -16,6 +16,7 @@ export function ProjectRail() {
   const [index, setIndex] = useState(0);
   const [bounds, setBounds] = useState({ left: 0, right: 0 });
   const viewportRef = useRef<HTMLDivElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Array<HTMLElement | null>>([]);
   const targetsRef = useRef<number[]>([]);
   const indexRef = useRef(0);
@@ -73,7 +74,7 @@ export function ProjectRail() {
   }, [measure, goTo]);
 
   useEffect(() => {
-    const el = viewportRef.current;
+    const el = railRef.current;
     if (!el) return;
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "ArrowRight") {
@@ -105,7 +106,7 @@ export function ProjectRail() {
   const active = projects[index];
 
   return (
-    <div className="work-rail" data-testid="work-rail">
+    <div className="work-rail" data-testid="work-rail" ref={railRef}>
       <div className="work-rail__head section-shell">
         <span className="work-rail__cue" aria-hidden="true">
           <i />

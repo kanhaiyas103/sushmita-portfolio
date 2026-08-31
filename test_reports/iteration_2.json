@@ -1,0 +1,26 @@
+{
+  "summary": "Retest of the 'Selected Work' ProjectRail on the PUBLIC preview URL after switching to a production build (next start) and moving the keydown listener to the outer .work-rail container. BOTH previously reported blockers are FIXED. Hydration probe returns TRUE on /rail-preview (desktop 1920 + mobile 390) and on / (homepage). Zero console messages, zero pageerrors, ZERO webpack-hmr/WebSocket errors. Next/Prev, keyboard arrows, mouse drag, mobile swipe, disabled states, homepage rail and all 4 case-study routes work. 12/12 checks pass.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Homepage / rail-preview desktop 1920", "issues": ["Cosmetic only: the active card is centered on the .work-rail__viewport (center ~784px) rather than the visual page center (960px), so the active card sits slightly left of the screen center while the next card gets more visible space. Verify this is the intended editorial off-center composition."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "ProjectRail.tsx L76-90: keydown listener now on railRef (outer .work-rail) - verified working from the focused nav buttons on the public production build. Fix confirmed.",
+    "Serving via `next start` (pid 5829, next-server v16.2.6) removes the dev HMR client; no /_next/webpack-hmr WebSocket attempts remain and hydration completes. Ensure the supervisor/start command permanently runs `next build && next start` (previous iteration noted supervisor 'frontend' program had a chdir ENOENT to /app/frontend and the server was started manually - confirm the process survives a container/supervisor restart, otherwise the preview will go dead again).",
+    "Minor a11y: .work-rail__viewport still has no tabIndex, so keyboard nav only works while a nav button (or another focusable child of .work-rail) has focus - acceptable, but tabIndex={0} on the viewport would make the 'use arrow keys' aria-label fully true."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (no backend)", "frontend": "100% (12/12 checks passed on the PUBLIC URL)"},
+  "seed_data_creation": "None",
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_self_test": true,
+  "test_credentials": "None required (public static site)",
+  "context_for_next_testing_agent": "Observed values on PUBLIC URL /rail-preview @1920: HYDRATION=True; INITIAL 01/work-card-makemytrip prevDisabled=True; NEXT#1 02/spectra; NEXT#2 03/startup-india; PREV 02/spectra; end 04/spec-ads nextDisabled=True; back to 01 prevDisabled=True. KEYBOARD (focus work-rail-next): ArrowRight 01->02->03, ArrowLeft 03->02. MOUSE DRAG: left 320px 01->02, right 320px 02->01. MOBILE 390: HYDRATION=True, swipe left 01->02, NEXT 02->03, documentElement.scrollWidth=390 == innerWidth=390 == body 390 (no page overflow). HOMEPAGE: hydration True, 01->02 via NEXT, docSW 1920 == innerWidth 1920; CTA work-card-cta-makemytrip navigates to /work/makemytrip (h1 'MAKE MY TRIP', 1711 chars of case-study content); /work/spectra, /work/startup-india, /work/spec-ads all 200 with correct h1. Console completely clean on all pages. /app/rail-preview is a temporary test page and should be removed before shipping.",
+  "rca_of_the_issue": "Iteration_1 root cause confirmed and resolved: the preview ingress does not proxy the Next dev HMR WebSocket (wss://.../_next/webpack-hmr -> 502/404), which stalled client hydration. Serving a production build eliminates the dev client runtime entirely; hydration probe Object.keys(el).some(k=>k.startsWith('__react')) now returns true on the public URL and all rail interactions respond. The keyboard defect was fixed by relocating the keydown listener from .work-rail__viewport (a sibling subtree of the nav buttons) to the outer .work-rail container so button-focused arrow keys bubble to it."
+}
