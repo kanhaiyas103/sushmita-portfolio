@@ -4,6 +4,20 @@ export type ProjectVisual = {
   label: string;
   description: string;
   aspect: "wide" | "landscape" | "portrait" | "square";
+  crop?: "left-half" | "notice-board";
+  display?: "compact";
+  overlay?: {
+    src: string;
+    alt: string;
+    label: string;
+  };
+  highlight?: {
+    label: string;
+    left: number;
+    top: number;
+    width: number;
+    height: number;
+  };
 };
 
 type ProjectVideoBase = {
@@ -87,12 +101,12 @@ export const projects: Project[] = [
     ],
     alt: "MakeMyTrip destination copy for Baku, Almaty and Hong Kong",
     brief:
-      "Create consumer-facing destination copy for MakeMyTrip’s mobile and digital travel experience.",
+      "Create an engaging content to teleport the reader directly to the destination.",
     approach:
       "The portfolio shows destination modules for Baku, Almaty and Hong Kong, using location guides, recommendations and clear next steps.",
     thinking:
       "The writing works alongside the interface: concise, useful and focused on helping travellers understand their options.",
-    featuredLine: "Explore Almaty",
+    featuredLine: "Baku, captured in limited words.",
     impact:
       "Within the supplied work, the copy gives travellers clear entry points into destinations, recommendations and next steps.",
     theme: "aqua",
@@ -114,7 +128,14 @@ export const projects: Project[] = [
         description:
           "A Spectra campaign execution placed within Jagran’s live editorial environment.",
         aspect: "wide",
-      },
+          highlight: {
+            label: "SPECTRA AD",
+            left: 68.1,
+            top: 44,
+            width: 20.9,
+            height: 28.8,
+          },
+        },
       {
         src: "/images/portfolio/spectra-ht-tech.jpeg",
         alt: "Spectra advertisement placed on the HT Tech website",
@@ -122,23 +143,32 @@ export const projects: Project[] = [
         description:
           "The same campaign idea adapted for a technology-news context on HT Tech.",
         aspect: "wide",
-      },
+          highlight: {
+            label: "SPECTRA AD",
+            left: 70.1,
+            top: 30.1,
+            width: 21.9,
+            height: 31.6,
+          },
+        },
       {
-        src: "/images/portfolio/spectra-context.jpeg",
+          src: "/images/portfolio/spectra-context-clear.jpeg",
         alt: "Spectra contextual workplace execution installed near an elevator",
         label: "CONTEXTUAL WORKPLACE EXECUTION",
-        description:
-          "A contextual workplace line built around the moment people pass an elevator notice board.",
-        aspect: "landscape",
-      },
-      {
-        src: "/images/portfolio/spectra-awards.jpeg",
-        alt: "Spectra people-led award communication in dark and light variants",
-        label: "PEOPLE-LED SOCIAL COMMUNICATION",
-        description:
-          "People-led award communication recognizing dedication, consistent effort and standout performance.",
-        aspect: "square",
-      },
+          description:
+            "A contextual workplace line built around the moment people pass an elevator notice board.",
+          aspect: "landscape",
+          crop: "notice-board",
+        },
+        {
+          src: "/images/portfolio/spectra-awards-clear.jpeg",
+          alt: "Spectra people-led award communication in a dark variant",
+          label: "PEOPLE-LED SOCIAL COMMUNICATION",
+          description:
+            "People-led award communication recognizing dedication, consistent effort and standout performance.",
+          aspect: "portrait",
+          display: "compact",
+        },
     ],
     alt: "Spectra campaign work across editorial placements and social posts",
     brief:
@@ -147,7 +177,7 @@ export const projects: Project[] = [
       "The selected work uses direct, situational headlines across everyday work moments and people-led communication.",
     thinking:
       "Across formats, the copy stays concise and grounded in the context in which it appears.",
-    featuredLine: "Celebrating the people powering our progress.",
+    featuredLine: "Network that redefines.",
     impact:
       "The supplied executions bring recognizable workplace moments into concise social, contextual and people-led communication.",
     theme: "paper",
@@ -220,14 +250,19 @@ export const projects: Project[] = [
       "Speculative briefs spanning travel, a voice-led dating concept and an extraterrestrial tourism prompt.",
     heroImage: "/images/portfolio/spec-ads.jpeg",
     gallery: [
-      {
-        src: "/images/portfolio/spec-indigo.jpeg",
-        alt: "IndiGo speculative advertisement about spending more on experiences",
-        label: "TRAVEL HEADLINE / INDIGO",
-        description:
-          "Brief: celebrate IndiGo’s lowest fares. Response: “Spend more on experiences than on tickets.”",
-        aspect: "portrait",
-      },
+        {
+          src: "/images/portfolio/spec-indigo.jpeg",
+          alt: "IndiGo speculative advertisement about spending more on experiences",
+          label: "TRAVEL HEADLINE / INDIGO",
+          description:
+            "Brief: celebrate IndiGo’s lowest fares. Response: “Spend more on experiences than on tickets.”",
+          aspect: "portrait",
+          overlay: {
+            src: "/images/portfolio/spec-indigo-comment.jpeg",
+            alt: "IndiGo comment recognising the LinkedIn travel headline",
+            label: "INDIGO COMMENT / LINKEDIN RESPONSE",
+          },
+        },
       {
         src: "/images/portfolio/spec-indigo-comment.jpeg",
         alt: "IndiGo publicly commenting in recognition of the flight-fare concept above",

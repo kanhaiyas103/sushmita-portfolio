@@ -43,12 +43,12 @@ test("renders the finished portfolio homepage", async () => {
   );
   assert.match(html, /href="mailto:nandasushmita30@gmail\.com"/);
   assert.match(html, /href="tel:\+918920153554"/);
-  assert.match(html, /THOUGHT/);
-  assert.match(html, /IDEA/);
-  assert.match(html, /EXECUTION/);
-  assert.match(html, /EXPLORE CASE STUDY/);
+  assert.match(html, /OBSERVE/);
+  assert.match(html, /UNDERSTAND/);
+  assert.match(html, /WRITE/);
+  assert.match(html, /VIEW CASE STUDY/);
   assert.match(html, /HOVER, FOCUS OR TAP A WORD/);
-  assert.match(html, /sushmita-portrait-cutout\.png/);
+  assert.match(html, /sushmita-portrait\.jpeg/);
   assert.match(html, /alt="Portrait of Sushmita Nanda"/);
   assert.doesNotMatch(html, /linkedin\.com/i);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
@@ -56,11 +56,11 @@ test("renders the finished portfolio homepage", async () => {
 
 test("renders every case study route", async () => {
   const cases = {
-    makemytrip: ["Explore Almaty", "mmt-baku.jpeg"],
-    spectra: ["Celebrating the people powering our progress.", "spectra-jagran.jpeg"],
+    makemytrip: ["Create an engaging content to teleport the reader", "mmt-baku.jpeg"],
+    spectra: ["Across formats, the copy stays concise", "spectra-jagran.jpeg"],
     "startup-india": [
       "Startup India Innovation Summit / January 2023",
-      "startup-superstree.jpeg",
+      "startup-innovation-summit.jpg",
     ],
     "spec-ads": ["Spend more on experiences than on tickets", "spec-indigo-comment.jpeg"],
   };
@@ -71,12 +71,11 @@ test("renders every case study route", async () => {
     const html = await response.text();
     assert.match(html, /BRIEF/);
     assert.match(html, /THINKING/);
-    assert.match(html, /COPY/);
     assert.match(html, /EXECUTION/);
     assert.match(html, /IMPACT/);
     assert.match(html, new RegExp(featuredLine.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     assert.match(html, new RegExp(suppliedVisual.replace(".", "\\.")));
-    assert.match(html, /SELECTED OUTPUTS/);
+    assert.match(html, /A story about the work, not a gallery of it/);
     assert.match(html, /RETURN TO SELECTED WORK/);
     assert.doesNotMatch(html, /case-hero__image/);
     assert.doesNotMatch(html, /Chidi|PROFILE LINK TO BE ADDED/i);
@@ -84,14 +83,29 @@ test("renders every case study route", async () => {
     if (slug === "makemytrip") {
       assert.match(html, /mmt-baku-destination\.mp4/);
       assert.match(html, /Baku destination experience/);
+      assert.match(
+        html,
+        /Baku is a much sought-after destination\. The aim is to capture the vibe of the city in limited words\./,
+      );
+      assert.match(html, /03 \/ (?:<!-- -->)?THE EXECUTION/);
+      assert.match(html, /04 \/ (?:<!-- -->)?THE IMPACT/);
+      assert.doesNotMatch(html, /03 \/ (?:<!-- -->)?THE COPY/);
+      assert.doesNotMatch(html, /Explore Almaty/);
+    } else if (slug === "spectra") {
+      assert.match(html, /Highlighted placement: SPECTRA AD/);
+      assert.match(html, /03 \/ (?:<!-- -->)?THE EXECUTION/);
+      assert.match(html, /04 \/ (?:<!-- -->)?THE IMPACT/);
+      assert.doesNotMatch(html, /03 \/ (?:<!-- -->)?THE COPY/);
+      assert.doesNotMatch(html, /Celebrating the people powering our progress\./);
+    } else {
+      assert.match(html, /COPY/);
     }
 
     if (slug === "startup-india") {
       assert.match(html, /youtube\.com\/watch\?v=jrCQET9XSx8/);
       assert.match(html, /youtube\.com\/watch\?v=-8kon_IJBuw/);
       assert.match(html, /youtube\.com\/shorts\/4svEhWMS3UM/);
-      assert.match(html, /WATCH FULL ON YOUTUBE/);
-      assert.match(html, /introduces women as creators, mentors and more/);
+      assert.match(html, /FULL VIDEO ON YOUTUBE/);
     }
   }
 });
@@ -115,9 +129,7 @@ test("keeps project content data-driven and starter-free", async () => {
 test("serves the portfolio social image", async () => {
   await access(new URL("../public/og.png", import.meta.url));
   await access(new URL("../public/images/portfolio/makemytrip.jpeg", import.meta.url));
-  await access(
-    new URL("../public/images/portfolio/sushmita-portrait-cutout.png", import.meta.url),
-  );
+  await access(new URL("../public/images/portfolio/sushmita-portrait.jpeg", import.meta.url));
   await access(new URL("../public/images/portfolio/mmt-baku.jpeg", import.meta.url));
   await access(
     new URL("../public/images/portfolio/startup-superstree.jpeg", import.meta.url),

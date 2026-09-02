@@ -74,8 +74,10 @@ export default function Home() {
           <Reveal className="about-copy" delay={0.08}>
             <p className="lead">Communication begins with understanding people.</p>
             <p>
-              Sushmita Nanda is a storyteller focused on brands, audiences and
-              the stories that connect them. She approaches every brief with
+              Sushmita Nanda is a storyteller who begins by understanding the audience. 
+              With her stories, she focuses on bridging a connection between the  brand and the
+              TG 
+              . She approaches every brief with
               curiosity and intention, bringing strategic thinking and creative
               expression together to shape how brands are perceived, understood
               and remembered.
@@ -151,8 +153,8 @@ export default function Home() {
               Brands and teams I&apos;ve worked with.
             </p>
             <p>
-              A selection of organizations and brands represented across
-              Sushmita&apos;s supplied portfolio.
+              A selection of organisations and brands represented across
+              portfolio.
             </p>
           </div>
         </div>
@@ -194,7 +196,7 @@ export default function Home() {
             <h2 id="work-title">STORIES, SHAPED FOR THE MOMENT.</h2>
           </Reveal>
           <p>
-            Campaign copy, digital storytelling and creative explorations—each
+            Campaign copy, digital storytelling and creative explorations
             approached through the audience&apos;s point of view.
           </p>
           <EditorialAnnotations

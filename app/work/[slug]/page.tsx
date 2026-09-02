@@ -83,7 +83,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <p>{project.description}</p>
           </Reveal>
 
-          <CaseVideos project={project} />
+          {project.slug === "makemytrip" ? null : <CaseVideos project={project} />}
         </header>
 
         <CaseFlow project={project} />

@@ -892,12 +892,168 @@
   transform: scale(1.02);
 }
 
-.case-beat__media figcaption {
+  .case-beat__frame.has-highlight::after {
+    background:
+      linear-gradient(90deg, rgba(255, 204, 18, 0.18), transparent 42%),
+      linear-gradient(180deg, rgba(255, 204, 18, 0.12), transparent 50%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+    z-index: 1;
+  }
+
+  .case-beat__frame.has-overlay {
+    background: var(--theme-warm);
+  }
+
+  .case-beat__overlay-card {
+    background: var(--theme-warm);
+    border: 1px solid color-mix(in srgb, var(--theme-bg), transparent 72%);
+    box-shadow: 0 22px 54px rgba(0, 0, 0, 0.28);
+    height: 16%;
+    overflow: hidden;
+    position: absolute;
+    right: 4%;
+    top: 76%;
+    width: 58%;
+    z-index: 3;
+  }
+
+  .case-beat__overlay-card img,
+  .case-beat:hover .case-beat__overlay-card img {
+    object-fit: cover;
+    transform: none;
+  }
+
+.case-beat__highlight {
+  border: 2px solid var(--aqua);
+  box-shadow: 0 0 0 999px rgba(0, 0, 0, 0.14);
+  left: var(--highlight-left);
+  min-height: 46px;
+  min-width: 76px;
+  pointer-events: none;
+  position: absolute;
+  top: var(--highlight-top);
+  width: var(--highlight-width);
+  height: var(--highlight-height);
+  z-index: 2;
+}
+
+  .case-beat__highlight span {
+    background: var(--aqua);
+    color: var(--theme-bg);
+  display: inline-block;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: clamp(0.52rem, 0.65vw, 0.68rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+    padding: 6px 8px;
+    position: absolute;
+    right: -2px;
+    top: calc(-1.35rem - 10px);
+    white-space: nowrap;
+  }
+
+  .case-beat__frame.is-crop-left-half {
+    aspect-ratio: 4 / 5;
+  }
+
+  .case-beat__frame.is-crop-notice-board {
+    aspect-ratio: 4 / 3;
+  }
+
+.case-beat--pair .case-beat__media--cropped {
+    flex: 0 0 min(38vw, 500px);
+    max-width: 500px;
+  }
+
+  .case-beat--pair .case-beat__media--compact {
+    flex: 0 0 min(30vw, 390px);
+    max-width: 390px;
+  }
+
+  .case-beat__frame.is-crop-left-half img {
+    height: 100% !important;
+    left: 0 !important;
+    max-width: none;
+    object-fit: cover !important;
+    object-position: left center !important;
+    width: 200% !important;
+  }
+
+  .case-beat__frame.is-crop-notice-board img {
+    object-fit: cover;
+    object-position: 55% 48%;
+    transform: scale(1.1);
+  }
+
+  .case-beat:hover .case-beat__frame.is-crop-notice-board img {
+    transform: scale(1.13);
+  }
+
+  .case-beat__media figcaption {
   color: var(--theme-muted);
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.58rem;
   letter-spacing: 0.12em;
   margin-top: 14px;
+}
+
+/* --- MakeMyTrip thinking: video + interface reference together --- */
+.case-beat--video-image {
+  display: grid;
+  gap: clamp(22px, 3vw, 44px);
+  max-width: 1280px;
+}
+
+.case-beat__media--split {
+  width: 100%;
+}
+
+.case-beat__split-media {
+  align-items: start;
+  display: grid;
+  gap: clamp(18px, 2.4vw, 34px);
+  grid-template-columns: minmax(240px, 0.8fr) minmax(360px, 1.6fr);
+}
+
+.case-beat__video-frame {
+  aspect-ratio: 4 / 5;
+  background: #020202;
+  border: 1px solid var(--theme-line);
+  overflow: hidden;
+  position: relative;
+}
+
+.case-beat__video-frame video {
+  display: block;
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+.case-beat__image-column {
+  display: grid;
+  gap: 16px;
+}
+
+.case-beat__image-note {
+  color: var(--theme-warm);
+  font-size: clamp(1rem, 1.35vw, 1.28rem);
+  line-height: 1.45;
+  margin: 0;
+  max-width: 42ch;
+}
+
+.case-beat--video-image .case-beat__text {
+  border-left: 2px solid var(--aqua);
+  max-width: 760px;
+  padding-left: clamp(18px, 2.4vw, 40px);
+}
+
+.case-beat--video-image .case-beat__text p {
+  max-width: 46ch;
 }
 
 /* --- text block --- */
@@ -980,11 +1136,29 @@
     gap: 20px;
   }
 
+  .case-beat__split-media {
+    grid-template-columns: 1fr;
+  }
+
+  .case-beat__video-frame {
+    max-width: 420px;
+  }
+
   .case-beat--pair .case-beat__media,
   .case-beat--pair .case-beat__text {
     flex: 1 1 auto;
     width: 100%;
   }
+
+  .case-beat--pair .case-beat__media--cropped {
+      max-width: 360px;
+      width: min(100%, 360px);
+    }
+
+    .case-beat--pair .case-beat__media--compact {
+      max-width: 320px;
+      width: min(100%, 320px);
+    }
 
   .case-beat__text p,
   .case-beat--text.is-lead .case-beat__text p {
