@@ -77,7 +77,7 @@ export const projects: Project[] = [
         alt: "MakeMyTrip Experience Bali destination collection",
         label: "DESTINATION COLLECTION / EXPERIENCE BALI",
         description:
-          "Curating collections was a fun and learning experience—from deciding on the images to writing copy for each collection, every step was a thought-provoking drill.",
+          "Curating collections was a fun and learning experience, from deciding on the images to writing copy for each collection, every step was a thought-provoking drill.",
         aspect: "wide",
       },
       {
