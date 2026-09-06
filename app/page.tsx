@@ -288,6 +288,14 @@ export default function Home() {
                 <span>PHONE</span>
                 +91 89201 53554
               </a>
+              <a
+                href="https://www.linkedin.com/in/sushmita-nanda-63b6931b1"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <span>LINKEDIN</span>
+                sushmita-nanda ↗
+              </a>
             </address>
           </div>
         </div>

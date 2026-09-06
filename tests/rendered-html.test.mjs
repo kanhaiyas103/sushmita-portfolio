@@ -50,7 +50,7 @@ test("renders the finished portfolio homepage", async () => {
   assert.match(html, /HOVER, FOCUS OR TAP A WORD/);
   assert.match(html, /sushmita-portrait\.jpeg/);
   assert.match(html, /alt="Portrait of Sushmita Nanda"/);
-  assert.doesNotMatch(html, /linkedin\.com/i);
+  assert.match(html, /href="https:\/\/www\.linkedin\.com\/in\/sushmita-nanda-63b6931b1"/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
