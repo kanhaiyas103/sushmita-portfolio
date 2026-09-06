@@ -94,7 +94,8 @@ test("renders every case study route", async () => {
     } else if (slug === "spectra") {
       assert.match(html, /Highlighted placement: SPECTRA AD/);
       assert.match(html, /03 \/ (?:<!-- -->)?THE EXECUTION/);
-      assert.match(html, /04 \/ (?:<!-- -->)?THE IMPACT/);
+      assert.doesNotMatch(html, /04 \/ (?:<!-- -->)?THE IMPACT/);
+      assert.doesNotMatch(html, /recognizable workplace moments into concise social/);
       assert.doesNotMatch(html, /03 \/ (?:<!-- -->)?THE COPY/);
       assert.doesNotMatch(html, /Celebrating the people powering our progress\./);
     } else {

@@ -61,7 +61,7 @@ export const projects: Project[] = [
     shortTitle: "MMT",
     category: "Consumer Copy & Campaign",
     description:
-      "Consumer-facing destination copy and guidance across MakeMyTrip’s digital travel experience.",
+      "Consumer-facing UX copy to enhance MakeMyTrip’s digital travel experience.",
     heroImage: "/images/portfolio/makemytrip.jpeg",
     gallery: [
       {
@@ -105,7 +105,7 @@ export const projects: Project[] = [
     approach:
       "The portfolio shows destination modules for Baku, Almaty and Hong Kong, using location guides, recommendations and clear next steps.",
     thinking:
-      "The writing works alongside the interface: concise, useful and focused on helping travellers understand their options.",
+      "The writing that works alongside the interface: concise, useful and focused on helping travellers understand their options.",
     featuredLine: "Baku, captured in limited words.",
     impact:
       "Within the supplied work, the copy gives travellers clear entry points into destinations, recommendations and next steps.",
@@ -118,7 +118,7 @@ export const projects: Project[] = [
     shortTitle: "SPECTRA",
     category: "Digital / Editorial Storytelling",
     description:
-      "Social, contextual and digital communication shaped around recognizable workplace moments.",
+      "Copy editing and copywriting for a B2B telecom marketplace.",
     heroImage: "/images/portfolio/spectra-social.jpeg",
     gallery: [
       {
@@ -172,11 +172,11 @@ export const projects: Project[] = [
     ],
     alt: "Spectra campaign work across editorial placements and social posts",
     brief:
-      "Create copy across social posts, contextual executions and digital publication placements.",
+      "Create copy for social posts, website and digital publication placements.",
     approach:
       "The selected work uses direct, situational headlines across everyday work moments and people-led communication.",
     thinking:
-      "Across formats, the copy stays concise and grounded in the context in which it appears.",
+      "Ad copywriting for lead generation and brand awareness.",
     featuredLine: "Network that redefines.",
     impact:
       "The supplied executions bring recognizable workplace moments into concise social, contextual and people-led communication.",
