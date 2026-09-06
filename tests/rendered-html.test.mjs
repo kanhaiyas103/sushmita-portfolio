@@ -62,7 +62,7 @@ test("renders every case study route", async () => {
       "Startup India Innovation Summit / January 2023",
       "startup-innovation-summit.jpg",
     ],
-    "spec-ads": ["Spend more on experiences than on tickets", "spec-indigo-comment.jpeg"],
+    "spec-ads": ["Each execution follows the form of its brief", "spec-indigo-comment.jpeg"],
   };
 
   for (const [slug, [featuredLine, suppliedVisual]] of Object.entries(cases)) {
@@ -70,7 +70,6 @@ test("renders every case study route", async () => {
     assert.equal(response.status, 200, `${slug} should render`);
     const html = await response.text();
     assert.match(html, /BRIEF/);
-    assert.match(html, /EXECUTION/);
     assert.doesNotMatch(html, /THE IMPACT/);
     assert.match(html, new RegExp(featuredLine.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     assert.match(html, new RegExp(suppliedVisual.replace(".", "\\.")));
@@ -80,6 +79,7 @@ test("renders every case study route", async () => {
     assert.doesNotMatch(html, /Chidi|PROFILE LINK TO BE ADDED/i);
 
     if (slug === "makemytrip") {
+      assert.match(html, /EXECUTION/);
       assert.match(html, /mmt-baku-destination\.mp4/);
       assert.match(html, /Baku destination experience/);
       assert.match(
@@ -90,6 +90,7 @@ test("renders every case study route", async () => {
       assert.doesNotMatch(html, /03 \/ (?:<!-- -->)?THE COPY/);
       assert.doesNotMatch(html, /Explore Almaty/);
     } else if (slug === "spectra") {
+      assert.match(html, /EXECUTION/);
       assert.match(html, /Highlighted placement: SPECTRA AD/);
       assert.match(html, /03 \/ (?:<!-- -->)?THE EXECUTION/);
       assert.doesNotMatch(html, /recognizable workplace moments into concise social/);
@@ -97,8 +98,12 @@ test("renders every case study route", async () => {
       assert.doesNotMatch(html, /Celebrating the people powering our progress\./);
     } else if (slug === "spec-ads") {
       assert.match(html, /02 \/ (?:<!-- -->)?THE BRIEF/);
+      assert.match(html, /03 \/ (?:<!-- -->)?THE BRIEF/);
       assert.doesNotMatch(html, /02 \/ (?:<!-- -->)?THE THINKING/);
+      assert.doesNotMatch(html, /03 \/ (?:<!-- -->)?THE COPY/);
+      assert.doesNotMatch(html, /THE EXECUTION/);
     } else {
+      assert.match(html, /EXECUTION/);
       assert.match(html, /THINKING/);
       assert.match(html, /COPY/);
     }

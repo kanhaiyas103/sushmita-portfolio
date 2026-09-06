@@ -24,7 +24,8 @@ export function CaseFlow({ project }: { project: Project }) {
     project.slug === "makemytrip"
       ? project.videos?.find((video) => video.kind === "local")
       : undefined;
-  const showCopyBeat = !["makemytrip", "spectra"].includes(project.slug);
+  const isSpecAds = project.slug === "spec-ads";
+  const showCopyBeat = !["makemytrip", "spectra", "spec-ads"].includes(project.slug);
   const executionStepNo = showCopyBeat ? "04" : "03";
   const beats: Beat[] = [];
 
@@ -39,7 +40,7 @@ export function CaseFlow({ project }: { project: Project }) {
   beats.push({
     key: "thinking",
     no: "02",
-    label: project.slug === "spec-ads" ? "THE BRIEF" : "THE THINKING",
+    label: isSpecAds ? "THE BRIEF" : "THE THINKING",
     body: project.thinking,
     visual: gallery[0],
     video: inlineThinkingVideo,
@@ -54,7 +55,7 @@ export function CaseFlow({ project }: { project: Project }) {
       beats.push({
         key: `execution-${index}`,
         no: index === 0 ? executionStepNo : undefined,
-        label: index === 0 ? "THE EXECUTION" : undefined,
+        label: index === 0 ? (isSpecAds ? "THE BRIEF" : "THE EXECUTION") : undefined,
         body: visual.description,
         visual,
       });
@@ -63,7 +64,7 @@ export function CaseFlow({ project }: { project: Project }) {
     beats.push({
       key: "execution",
       no: executionStepNo,
-      label: "THE EXECUTION",
+      label: isSpecAds ? "THE BRIEF" : "THE EXECUTION",
       body: project.approach,
     });
   }
@@ -95,11 +96,7 @@ export function CaseFlow({ project }: { project: Project }) {
           return (
             <div key={beat.key}>
               <BeatBlock beat={beat} layout={layout} />
-              <Reveal
-                className={`case-flow__copy${
-                  project.slug === "spec-ads" ? " case-flow__copy--compact" : ""
-                }`}
-              >
+              <Reveal className="case-flow__copy">
                 <span className="case-flow__label">03 / THE COPY</span>
                 <blockquote>{project.featuredLine}</blockquote>
                 <span className="case-flow__copy-note">SUPPLIED CAMPAIGN LINE</span>
