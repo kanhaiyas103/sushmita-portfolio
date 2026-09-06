@@ -99,6 +99,7 @@ test("renders every case study route", async () => {
     } else if (slug === "spec-ads") {
       assert.match(html, /02 \/ (?:<!-- -->)?THE BRIEF/);
       assert.match(html, /03 \/ (?:<!-- -->)?THE BRIEF/);
+      assert.match(html, /04 \/ (?:<!-- -->)?THE BRIEF/);
       assert.doesNotMatch(html, /02 \/ (?:<!-- -->)?THE THINKING/);
       assert.doesNotMatch(html, /03 \/ (?:<!-- -->)?THE COPY/);
       assert.doesNotMatch(html, /THE EXECUTION/);

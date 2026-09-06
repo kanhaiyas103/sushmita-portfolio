@@ -54,8 +54,12 @@ export function CaseFlow({ project }: { project: Project }) {
     executionVisuals.forEach((visual, index) => {
       beats.push({
         key: `execution-${index}`,
-        no: index === 0 ? executionStepNo : undefined,
-        label: index === 0 ? (isSpecAds ? "THE BRIEF" : "THE EXECUTION") : undefined,
+        no: isSpecAds
+          ? String(index + 3).padStart(2, "0")
+          : index === 0
+            ? executionStepNo
+            : undefined,
+        label: isSpecAds ? "THE BRIEF" : index === 0 ? "THE EXECUTION" : undefined,
         body: visual.description,
         visual,
       });
