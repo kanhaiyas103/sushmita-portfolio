@@ -57,7 +57,7 @@ test("renders the finished portfolio homepage", async () => {
 test("renders every case study route", async () => {
   const cases = {
     makemytrip: ["Create an engaging content to teleport the reader", "mmt-baku.jpeg"],
-    spectra: ["Across formats, the copy stays concise", "spectra-jagran.jpeg"],
+    spectra: ["Ad copywriting for lead generation and brand awareness", "spectra-jagran.jpeg"],
     "startup-india": [
       "Startup India Innovation Summit / January 2023",
       "startup-innovation-summit.jpg",
@@ -72,7 +72,7 @@ test("renders every case study route", async () => {
     assert.match(html, /BRIEF/);
     assert.match(html, /THINKING/);
     assert.match(html, /EXECUTION/);
-    assert.match(html, /IMPACT/);
+    assert.doesNotMatch(html, /THE IMPACT/);
     assert.match(html, new RegExp(featuredLine.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     assert.match(html, new RegExp(suppliedVisual.replace(".", "\\.")));
     assert.match(html, /A story about the work, not a gallery of it/);
@@ -88,13 +88,11 @@ test("renders every case study route", async () => {
         /Baku is a much sought-after destination\. The aim is to capture the vibe of the city in limited words\./,
       );
       assert.match(html, /03 \/ (?:<!-- -->)?THE EXECUTION/);
-      assert.match(html, /04 \/ (?:<!-- -->)?THE IMPACT/);
       assert.doesNotMatch(html, /03 \/ (?:<!-- -->)?THE COPY/);
       assert.doesNotMatch(html, /Explore Almaty/);
     } else if (slug === "spectra") {
       assert.match(html, /Highlighted placement: SPECTRA AD/);
       assert.match(html, /03 \/ (?:<!-- -->)?THE EXECUTION/);
-      assert.doesNotMatch(html, /04 \/ (?:<!-- -->)?THE IMPACT/);
       assert.doesNotMatch(html, /recognizable workplace moments into concise social/);
       assert.doesNotMatch(html, /03 \/ (?:<!-- -->)?THE COPY/);
       assert.doesNotMatch(html, /Celebrating the people powering our progress\./);

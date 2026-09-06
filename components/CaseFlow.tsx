@@ -26,8 +26,6 @@ export function CaseFlow({ project }: { project: Project }) {
       : undefined;
   const showCopyBeat = !["makemytrip", "spectra"].includes(project.slug);
   const executionStepNo = showCopyBeat ? "04" : "03";
-  const impactStepNo = showCopyBeat ? "05" : "04";
-  const showImpactBeat = project.slug !== "spectra";
   const beats: Beat[] = [];
 
   beats.push({
@@ -67,15 +65,6 @@ export function CaseFlow({ project }: { project: Project }) {
       no: executionStepNo,
       label: "THE EXECUTION",
       body: project.approach,
-    });
-  }
-
-  if (showImpactBeat) {
-    beats.push({
-      key: "impact",
-      no: impactStepNo,
-      label: "THE IMPACT",
-      body: project.impact,
     });
   }
 

@@ -49,7 +49,6 @@ export type Project = {
   approach: string;
   thinking: string;
   featuredLine: string;
-  impact: string;
   theme: "aqua" | "paper" | "ink" | "warm";
 };
 
@@ -107,8 +106,6 @@ export const projects: Project[] = [
     thinking:
       "The writing that works alongside the interface: concise, useful and focused on helping travellers understand their options.",
     featuredLine: "Baku, captured in limited words.",
-    impact:
-      "Within the supplied work, the copy gives travellers clear entry points into destinations, recommendations and next steps.",
     theme: "aqua",
   },
   {
@@ -178,8 +175,6 @@ export const projects: Project[] = [
     thinking:
       "Ad copywriting for lead generation and brand awareness.",
     featuredLine: "Network that redefines.",
-    impact:
-      "The supplied executions bring recognizable workplace moments into concise social, contextual and people-led communication.",
     theme: "paper",
   },
   {
@@ -236,8 +231,6 @@ export const projects: Project[] = [
     thinking:
       "The selected examples use concise framing to introduce the subject and give each piece a clear entry point.",
     featuredLine: "Startup India Innovation Summit / January 2023",
-    impact:
-      "Across the supplied examples, concise framing gives each video-led piece and summit story a clear point of entry.",
     theme: "ink",
   },
   {
@@ -296,8 +289,6 @@ export const projects: Project[] = [
     thinking:
       "Each execution follows the form of its brief, from a compact headline to longer narrative copy.",
     featuredLine: "Spend more on experiences than on tickets",
-    impact:
-      "The supplied briefs demonstrate range across a compact travel headline, longer narrative copy and concept-led communication.",
     theme: "warm",
   },
 ];

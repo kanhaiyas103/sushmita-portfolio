@@ -13,7 +13,6 @@ export function CaseStory({ project }: { project: Project }) {
     { label: "THINKING", content: project.thinking },
     { label: "COPY", content: project.featuredLine, isCopy: true },
     { label: "EXECUTION", content: project.approach },
-    { label: "IMPACT", content: project.impact },
   ];
 
   useEffect(() => {
@@ -41,7 +40,7 @@ export function CaseStory({ project }: { project: Project }) {
         <span>PROJECT STORY / {project.number}</span>
         <h2 id="case-story-title">
           BRIEF <b aria-hidden="true">→</b> THINKING <b aria-hidden="true">→</b> COPY
-          <b aria-hidden="true">→</b> EXECUTION <b aria-hidden="true">→</b> IMPACT
+          <b aria-hidden="true">→</b> EXECUTION
         </h2>
       </div>
 

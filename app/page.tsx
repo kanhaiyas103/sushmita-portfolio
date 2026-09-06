@@ -153,7 +153,7 @@ export default function Home() {
               Brands and teams I&apos;ve worked with.
             </p>
             <p>
-              A selection of brands that trusted my storytelling.
+              A selection of collaborations shaped through audience-first storytelling.
             </p>
           </div>
         </div>
