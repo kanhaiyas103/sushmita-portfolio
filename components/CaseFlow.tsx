@@ -172,20 +172,46 @@ function BeatBlock({
             beat.visual.display === "compact" ? " case-beat__media--compact" : ""
           }`}
         >
-          <div className={getFrameClassName(beat.visual)}>
-            <Image
-              alt={beat.visual.alt}
-              draggable={false}
-              fill
-              priority={priority}
-              sizes={getImageSizes(beat.visual)}
-              src={beat.visual.src}
-            />
-            <VisualOverlay visual={beat.visual} />
-            <VisualHighlight visual={beat.visual} />
-          </div>
+          {beat.visual.companion ? (
+            <div className={getFrameClassName(beat.visual)}>
+              <div className="case-beat__companion-frame">
+                <Image
+                  alt={beat.visual.alt}
+                  draggable={false}
+                  fill
+                  priority={priority}
+                  sizes="(max-width: 700px) calc(100vw - 44px), 28vw"
+                  src={beat.visual.src}
+                />
+              </div>
+              <div className="case-beat__companion-frame">
+                <Image
+                  alt={beat.visual.companion.alt}
+                  draggable={false}
+                  fill
+                  priority={priority}
+                  sizes="(max-width: 700px) calc(100vw - 44px), 28vw"
+                  src={beat.visual.companion.src}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className={getFrameClassName(beat.visual)}>
+              <Image
+                alt={beat.visual.alt}
+                draggable={false}
+                fill
+                priority={priority}
+                sizes={getImageSizes(beat.visual)}
+                src={beat.visual.src}
+              />
+              <VisualOverlay visual={beat.visual} />
+              <VisualHighlight visual={beat.visual} />
+            </div>
+          )}
           <figcaption>
             {beat.visual.label}
+            {beat.visual.companion ? ` / ${beat.visual.companion.label}` : ""}
             {beat.visual.overlay ? ` / ${beat.visual.overlay.label}` : ""}
           </figcaption>
         </figure>
@@ -206,7 +232,9 @@ function BeatBlock({
 function getFrameClassName(visual: ProjectVisual) {
   return `case-beat__frame case-beat__frame--${visual.aspect}${
     visual.highlight ? " has-highlight" : ""
-  }${visual.overlay ? " has-overlay" : ""}${visual.crop ? ` is-crop-${visual.crop}` : ""}`;
+  }${visual.overlay ? " has-overlay" : ""}${visual.companion ? " has-companion" : ""}${
+    visual.crop ? ` is-crop-${visual.crop}` : ""
+  }`;
 }
 
 function getImageSizes(visual: ProjectVisual, context: "default" | "split" = "default") {

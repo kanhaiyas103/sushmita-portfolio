@@ -62,7 +62,7 @@ test("renders every case study route", async () => {
       "Startup India Innovation Summit / January 2023",
       "startup-innovation-summit.jpg",
     ],
-    "spec-ads": ["Each execution follows the form of its brief", "spec-indigo-comment.jpeg"],
+    "spec-ads": ["Spec ad for promoting low-fare airline tickets by Indigo", "spec-indigo-comment.jpeg"],
   };
 
   for (const [slug, [featuredLine, suppliedVisual]] of Object.entries(cases)) {
@@ -93,13 +93,16 @@ test("renders every case study route", async () => {
       assert.match(html, /EXECUTION/);
       assert.match(html, /Highlighted placement: SPECTRA AD/);
       assert.match(html, /03 \/ (?:<!-- -->)?THE EXECUTION/);
-      assert.doesNotMatch(html, /recognizable workplace moments into concise social/);
       assert.doesNotMatch(html, /03 \/ (?:<!-- -->)?THE COPY/);
       assert.doesNotMatch(html, /Celebrating the people powering our progress\./);
     } else if (slug === "spec-ads") {
       assert.match(html, /02 \/ (?:<!-- -->)?THE BRIEF/);
       assert.match(html, /03 \/ (?:<!-- -->)?THE BRIEF/);
       assert.match(html, /04 \/ (?:<!-- -->)?THE BRIEF/);
+      assert.match(html, /05 \/ (?:<!-- -->)?THE BRIEF/);
+      assert.match(html, /spec-timeless-volvo\.jpeg/);
+      assert.match(html, /spec-timeless-chivas\.jpeg/);
+      assert.match(html, /If you had to give a headline to this timeless ad, what would it be\?/);
       assert.doesNotMatch(html, /02 \/ (?:<!-- -->)?THE THINKING/);
       assert.doesNotMatch(html, /03 \/ (?:<!-- -->)?THE COPY/);
       assert.doesNotMatch(html, /THE EXECUTION/);
