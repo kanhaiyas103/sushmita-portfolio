@@ -1113,6 +1113,14 @@
   max-width: 20ch;
 }
 
+.case-flow__copy--compact blockquote {
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+  max-width: 40ch;
+}
+
 .case-flow__copy-note {
   color: var(--theme-muted);
   display: inline-block;

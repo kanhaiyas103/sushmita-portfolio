@@ -39,7 +39,7 @@ export function CaseFlow({ project }: { project: Project }) {
   beats.push({
     key: "thinking",
     no: "02",
-    label: "THE THINKING",
+    label: project.slug === "spec-ads" ? "THE BRIEF" : "THE THINKING",
     body: project.thinking,
     visual: gallery[0],
     video: inlineThinkingVideo,
@@ -95,7 +95,11 @@ export function CaseFlow({ project }: { project: Project }) {
           return (
             <div key={beat.key}>
               <BeatBlock beat={beat} layout={layout} />
-              <Reveal className="case-flow__copy">
+              <Reveal
+                className={`case-flow__copy${
+                  project.slug === "spec-ads" ? " case-flow__copy--compact" : ""
+                }`}
+              >
                 <span className="case-flow__label">03 / THE COPY</span>
                 <blockquote>{project.featuredLine}</blockquote>
                 <span className="case-flow__copy-note">SUPPLIED CAMPAIGN LINE</span>

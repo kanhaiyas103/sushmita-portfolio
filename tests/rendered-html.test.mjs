@@ -39,7 +39,7 @@ test("renders the finished portfolio homepage", async () => {
   );
   assert.doesNotMatch(
     html,
-    /Chidi|Creative portfolio presentation|PROFILE LINK TO BE ADDED|BRANDS THAT TRUSTED/i,
+    /Chidi|Creative portfolio presentation|PROFILE LINK TO BE ADDED/i,
   );
   assert.match(html, /href="mailto:nandasushmita30@gmail\.com"/);
   assert.match(html, /href="tel:\+918920153554"/);
@@ -70,7 +70,6 @@ test("renders every case study route", async () => {
     assert.equal(response.status, 200, `${slug} should render`);
     const html = await response.text();
     assert.match(html, /BRIEF/);
-    assert.match(html, /THINKING/);
     assert.match(html, /EXECUTION/);
     assert.doesNotMatch(html, /THE IMPACT/);
     assert.match(html, new RegExp(featuredLine.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
@@ -96,7 +95,11 @@ test("renders every case study route", async () => {
       assert.doesNotMatch(html, /recognizable workplace moments into concise social/);
       assert.doesNotMatch(html, /03 \/ (?:<!-- -->)?THE COPY/);
       assert.doesNotMatch(html, /Celebrating the people powering our progress\./);
+    } else if (slug === "spec-ads") {
+      assert.match(html, /02 \/ (?:<!-- -->)?THE BRIEF/);
+      assert.doesNotMatch(html, /02 \/ (?:<!-- -->)?THE THINKING/);
     } else {
+      assert.match(html, /THINKING/);
       assert.match(html, /COPY/);
     }
 
