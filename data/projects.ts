@@ -4,6 +4,11 @@ export type ProjectVisual = {
   label: string;
   description: string;
   aspect: "wide" | "landscape" | "portrait" | "square";
+  companion?: {
+    src: string;
+    alt: string;
+    label: string;
+  };
   crop?: "left-half" | "notice-board";
   display?: "compact";
   overlay?: {
@@ -276,7 +281,7 @@ export const projects: Project[] = [
         alt: "Voice-led Bumble concept titled From Giggles to Tickles",
         label: "VOICE-LED DATING CONCEPT",
         description:
-          "Brief: reimagine a dating app without profile pictures, introducing a voice-first way to connect through long-form copy.",
+          "Reimagine a dating app without profile pictures, introducing a voice-first way to connect through long-form copy.",
         aspect: "portrait",
       },
       {
@@ -284,8 +289,21 @@ export const projects: Project[] = [
         alt: "Extraterrestrial tourism concept copy inviting friendly aliens to Earth",
         label: "EXTRATERRESTRIAL TOURISM / CONCEPT COPY",
         description:
-          "invite friendly extraterrestrial visitors to Earth by presenting the planet’s most compelling reasons to visit.",
+          "Invite friendly extraterrestrial visitors to Earth by presenting the planet’s most compelling reasons to visit.",
         aspect: "square",
+      },
+      {
+        src: "/images/portfolio/spec-timeless-volvo.jpeg",
+        alt: "Spec headline written over a timeless Volvo advertisement",
+        label: "TIMELESS AD HEADLINE / VOLVO",
+        description:
+          "If you had to give a headline to this timeless ad, what would it be?",
+        aspect: "wide",
+        companion: {
+          src: "/images/portfolio/spec-timeless-chivas.jpeg",
+          alt: "Spec headline written over a timeless Chivas Regal advertisement",
+          label: "TIMELESS AD HEADLINE / CHIVAS",
+        },
       },
     ],
     alt: "Spec ad concepts for travel, Bumble and an alien tourism brief",
